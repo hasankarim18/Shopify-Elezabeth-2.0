@@ -10,7 +10,8 @@
     {{ content_for_header }}
     <!-- Header hook for plugins -->
     {{ 'application.css' | asset_url | stylesheet_tag }}
-    {{ 'application.js' | asset_url | script_tag }}
+    <script defer src="{{'application.js' | asset_url }}"></script>
+    {% comment %} {{ 'application.js' | asset_url | script_tag }} {% endcomment %}
   </head>
   <body>
     <main role="main">
