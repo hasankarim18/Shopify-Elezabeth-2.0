@@ -2,6 +2,37 @@
 
 #### [Live Link](https://elezabeth-dev-store.myshopify.com/) // password: 4
 
+- tailwind configaration was changed
+
+```
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./layout/*.liquid"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+
+
+```
+
+to
+
+```
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./**/*.liquid"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+
+```
+
+- only the content portion is changed other wise not working properly, it will purge all the file
+
 [![Generic badge](https://img.shields.io/badge/course%20available%3F-yes-green.svg)](https://shields.io/)
 
 This project is created and intended to be used for the [Shopify Theme Development – Online Store 2.0 + TailwindCSS course](https://weeklyhow.com/courses/)
