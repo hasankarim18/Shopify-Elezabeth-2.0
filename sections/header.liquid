@@ -1,4 +1,4 @@
-<div class="relative bg-gray-300">
+<div class="relative ">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-center items-center py-6 md:justify-start md:space-x-10">
       <!-- STORE NAME / STORE LOGO -->
@@ -8,13 +8,13 @@
 
       <!-- NAVIGATION MENU -->
       <nav class="hidden md:flex space-x-10">
-        <div class="relative">
-          <a href="#" class="text-base text-gray-500 hover:text-gray-900">Link 01</a>
-        </div>
+        {% for link in linklists.main-menu %}
+            <div class="relative">
+                <a href="{{ link.url }}" class="text-base text-gray-500 hover:text-gray-900">{{ link.title }}</a>
+              </div>
+        {% endfor %}  
 
-        <div class="relative">
-          <a href="#" class="text-base text-gray-500 hover:text-gray-900">Link 1</a>
-        </div>
+      
 
         <div class="relative">
           <button type="button" class="inline-flex items-center text-base text-gray-500 hover:text-gray-900">
