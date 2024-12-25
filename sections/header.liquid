@@ -8,6 +8,8 @@
 
       <!-- NAVIGATION MENU -->
       <nav class="hidden md:flex space-x-10">
+        {% if linklists['main-menu'] %}
+        {% endif %}
         {% for link in linklists['main-menu'] %}
           <div class="relative">
             link s
