@@ -8,12 +8,13 @@
 
       <!-- NAVIGATION MENU -->
       <nav class="hidden md:flex space-x-10">
-        {% for link in linklists['main-menu'] %}
+        
+        {% for link in linklists.main-menu.links %}
             <div class="relative">
                 <a href="{{ link.url }}" class="text-base text-gray-500 hover:text-gray-900">{{ link.title }}</a>
               </div>
         {% endfor %}  
-
+        
       
 
         <div class="relative">
