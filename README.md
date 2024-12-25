@@ -1,6 +1,6 @@
 ### Elezabeth clene theme by Hasan
 
-#### [Live Link](https://elezabeth-dev-store.myshopify.com/)
+#### [Live Link](https://elezabeth-dev-store.myshopify.com/) // password: 4
 
 [![Generic badge](https://img.shields.io/badge/course%20available%3F-yes-green.svg)](https://shields.io/)
 
