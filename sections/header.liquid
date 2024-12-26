@@ -1,4 +1,6 @@
-<div class="relative bg-white" x-data="{ mobileMenuOpen: false }">
+{% assign main_meny_linklists = linklists[section.settings.menu].links %}
+
+  <div class="relative bg-white" x-data="{ mobileMenuOpen: false }">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
       <!-- STORE NAME / STORE LOGO -->
@@ -16,7 +18,8 @@
 
       <!-- NAVIGATION MENU -->
       <nav class="hidden md:flex space-x-10">
-        {% for link in linklists['main-menu'].links %}
+
+        {% for link in main_meny_linklists %}
           {% if link.links != blank %}
             {%- assign link_handle_md = link.handle | replace: '-', "--" -%}
             <div x-data="{ {{ link_handle_md }}: false }" class="relative">
@@ -31,7 +34,7 @@
               {% comment %} childlink div {% endcomment %}
               <div
                 x-show="{{ link_handle_md }}"
-                @click.away="{{ link_handle_md }} = false"
+                @mouseleave="{{ link_handle_md }} = false"
                 class="absolute z-10 -ml-5 mt-5 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
                 <div class="shadow-lg border ring-black ring-opacity-5 overflow-hidden rounded-lg">
                   <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
@@ -68,7 +71,7 @@
 
     </div>
   </div>
-  {% comment %} mobile menu {% endcomment %}
+  {% comment %} #mobile-menu {% endcomment %}
   <div x-show="mobileMenuOpen" class="absolute z-10 top-0 inset-x-0 p-2 transform origin-top-left md:hidden">
     <div class="shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 bg-white w-full">
       <div class="p-5 divide-y-2 divide-gray-50">
@@ -76,7 +79,7 @@
         <!-- MOBILE MENU HEADER TITLE PLUS CLOSE BUTTON -->
         <div class="flex items-center justify-between pb-3">
           <div>
-            <h1 class="text-lg text-gray-500">MENU</h1>
+            <h1 class="text-lg text-gray-500">{{ section.settings.mobile_menu_title }}</h1>
           </div>
           <div class="-mr-2">
             <button
@@ -118,11 +121,31 @@
                 </a>
               {% endif %}
             {% endfor %}
-
-
           </nav>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+{% schema %}
+  {
+    "name": "Navigational Bar",
+    "tag": "header",
+    "class": "new-header",
+    "settings": [
+      {
+        "type": "text",
+        "id": "mobile_menu_title",
+        "label": "Mobile Menu Title",
+        "default": "Menu",
+        "info": "This is for the mobile menu window"
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Navigational bar menu"
+      }
+    ]
+  }
+{% endschema %}
