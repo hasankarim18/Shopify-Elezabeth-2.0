@@ -1,7 +1,13 @@
-{% assign main_meny_linklists = linklists[section.settings.menu].links %}
+{%- if section.settings.menu == blank -%}
+  {% assign main_meny_linklists = linklists.backup-menu.links %}
+{%- else -%}
+  {% assign main_meny_linklists = linklists[section.settings.menu].links %}
+{%- endif -%}
 
-  <div class="relative bg-white" x-data="{ mobileMenuOpen: false }">
+
+<div class="relative bg-white" x-data="{ mobileMenuOpen: false }">
   <div class="mx-auto px-4 sm:px-6">
+
     <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
       <!-- STORE NAME / STORE LOGO -->
       <div class="flex justify-start lg:flex-1 truncate">
@@ -18,10 +24,14 @@
 
       <!-- NAVIGATION MENU -->
       <nav class="hidden md:flex space-x-10">
-
+        <style>
+          [x-cloak] {
+            display: none;
+          }
+        </style>
         {% for link in main_meny_linklists %}
           {% if link.links != blank %}
-            {%- assign link_handle_md = link.handle | replace: '-', "--" -%}
+            {% assign link_handle_md = link.handle | replace: '-', "_" %}
             <div x-data="{ {{ link_handle_md }}: false }" class="relative">
               <button
                 x-on:mouseover=" {{ link_handle_md }} = !{{ link_handle_md }}"
@@ -33,6 +43,7 @@
               </button>
               {% comment %} childlink div {% endcomment %}
               <div
+                x-cloak
                 x-show="{{ link_handle_md }}"
                 @mouseleave="{{ link_handle_md }} = false"
                 class="absolute z-10 -ml-5 mt-5 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
@@ -63,9 +74,11 @@
         <a href="{{ routes.cart_url }}" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
           {% render 'icon-shopping-bag' %}
         </a>
+        {% if shop.customer_accounts_enabled == true %}
+          <a href="{{ routes.account_login_url }}" class="text-base text-gray-500 hover:text-gray-900">Login</a>
+          <a href="{{ routes.account_register_url }}" class="text-base text-gray-500 hover:text-gray-900">Register</a>
+        {% endif %}
 
-        <a href="{{ routes.account_login_url }}" class="text-base text-gray-500 hover:text-gray-900">Login</a>
-        <a href="{{ routes.account_register_url }}" class="text-base text-gray-500 hover:text-gray-900">Register</a>
       </div>
     {% comment %} hamburgar {% endcomment %}
 
@@ -94,7 +107,7 @@
         <!-- NAVIGATION LINKS FOR MOBILE MENU -->
         <div class="pt-3">
           <nav class="grid gap-y-7">
-            {% for link in linklists.main-menu.links %}
+            {% for link in main_meny_linklists %}
 
               {% if link.links != blank %}
                 {%- assign link_handle = link.handle | replace: '-', '_' -%}

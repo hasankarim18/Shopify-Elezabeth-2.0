@@ -1,0 +1,46 @@
+<div class="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
+  <div class="relative">
+    <h1 class="text-9xl font-extrabold text-white tracking-widest">{{ section.settings.title }}</h1>
+    <div style="top: 60%;left: 50%;" class="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">
+      404
+    </div>
+  </div>
+  <p class="mt-4 mb-2 text-white text-xl">{{ section.settings.subtext }}</p>
+  <button class="mt-5">
+    <a href="{{ routes.root_url }}" class="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring">
+      <span class="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"></span>
+
+      <div class="relative block px-8 py-3 bg-[#1A2238] border border-current">
+        <span href="{{ routes.root_url }}">Go Home</span>
+      </div>
+    </a>
+  </button>
+</div>
+
+{% schema %}
+  {
+    "name": "Templage 404",
+    "tag": "section",
+    "class": "template-404",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "404",
+        "label": "404 Heading title"
+      },
+      {
+        "type": "text",
+        "id": "subtext",
+        "default": "Page you are looking for not found",
+        "label": "404 subtext title"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Templage 404",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
