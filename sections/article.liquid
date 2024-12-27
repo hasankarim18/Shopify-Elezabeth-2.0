@@ -5,19 +5,44 @@
         {{ blog.title }}</a>
       / {{ article.title }}
     </div>
-    <h1 class="text-center text-3xl mb-4">
+    <h1 class="text-center text-3xl ">
       {{ article.title }}
     </h1>
-    <div class="article-content mb-6">
-      <div class="float-left mr-4 mb-4">
-        <img
-          width="400"
-          height="400"
-          src="{{ article.image |  image_url }}">
+    {% comment %} article info {% endcomment %}
+    <div class="article-info mb-6 flex gap-4">
+      <h3>Author:
+        <span>
+          <i>
+            {{ article.author }}</i>
+        </span>
+      </h3>
+      <div>
+        Created At:
+        <i>
+          <time datetime="{{ article.created_at | date: '%B %d, %Y' }}">
+            {{ article.created_at | date: '%B %d, %Y' }}
+          </time>
+        </i>
       </div>
+    </div>
+    {% comment %} tags {% endcomment %}
+    <div class="tags mb-6">
+      <b>tags</b>
+    </div>
+    {% comment %} article content {% endcomment %}
+    <div class="article-content mb-6">
+      {% if article.image != blank %}
+        <div class="float-left mr-4 mb-4">
+          <img
+            alt="{{ article.image.alt }}"
+            loading="lazy"
+            width="400"
+            height="400"
+            src="{{ article.image |  image_url }}">
+        </div>
+      {% endif %}
       <div class="">
         {{ article.content }}</div>
-
     </div>
   </div>
 </div>
