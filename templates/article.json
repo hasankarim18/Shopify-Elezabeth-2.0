@@ -1,9 +1,27 @@
 {
   "name": "Article blog post",
   "sections": {
-    "template-blog-post": {
-      "type": "article"
+    "main": {
+      "type": "article",
+      "blocks": {
+        "title": {
+          "type": "title"
+        },
+        "author": {
+          "type": "article_author"
+        },
+        "date": {
+          "type": "published_date"
+        },
+        "image": {
+          "type": "featured_image"
+        },
+        "content": {
+          "type": "article_content"
+        }
+      },
+      "block_order": ["title", "author", "date", "image", "content"]
     }
   },
-  "order": ["template-blog-post"]
+  "order": ["main"]
 }

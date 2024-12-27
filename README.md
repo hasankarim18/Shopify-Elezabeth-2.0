@@ -1,5 +1,7 @@
 ### Elezabeth clene theme by Hasan
 
+#### [Gti Repo Link](https://github.com/hasankarim18/Shopify-Elezabeth-2.0)
+
 #### [Live Link](https://elezabeth-dev-store.myshopify.com/) // password: 4
 
 - tailwind configaration was changed

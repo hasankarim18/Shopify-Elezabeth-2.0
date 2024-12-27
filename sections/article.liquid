@@ -10,20 +10,24 @@
     </h1>
     {% comment %} article info {% endcomment %}
     <div class="article-info mb-6 flex gap-4">
-      <h3>Author:
-        <span>
+      {% if section.settings.enable_author == true %}
+        <h3>Author:
+          <span>
+            <i>
+              {{ article.author }}</i>
+          </span>
+        </h3>
+      {% endif %}
+      {% if section.settings.enable_publish_date %}
+        <div>
+          Created At:
           <i>
-            {{ article.author }}</i>
-        </span>
-      </h3>
-      <div>
-        Created At:
-        <i>
-          <time datetime="{{ article.created_at | date: '%B %d, %Y' }}">
-            {{ article.created_at | date: '%B %d, %Y' }}
-          </time>
-        </i>
-      </div>
+            <time datetime="{{ article.created_at | date: '%B %d, %Y' }}">
+              {{ article.created_at | date: '%B %d, %Y' }}
+            </time>
+          </i>
+        </div>
+      {% endif %}
     </div>
     {% comment %} tags {% endcomment %}
     <div class="tags mb-6">
@@ -57,3 +61,58 @@
   margin-bottom: 10px;
 }
 </style>
+
+{% schema %}
+  {
+    "name": "Template Article",
+    "tag": "section",
+    "class": "default-blog-post",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_author",
+        "default": true,
+        "label": "Enable Author"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_publish_date",
+        "default": true,
+        "label": "Enable Publish Date"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "title",
+        "name": "Title",
+        "limit": 1
+      },
+      {
+        "type": "article_author",
+        "name": "Author",
+        "limit": 1
+      },
+      {
+        "type": "published_date",
+        "name": "Published date",
+        "limit": 1
+      },
+      {
+        "type": "featured_image",
+        "name": "Featured Image",
+        "limit": 1
+      },
+      {
+        "type": "article_content",
+        "name": "Article content",
+        "limit": 1
+      }
+    ],
+    "presets": [
+      {
+        "name": "Template Article",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
