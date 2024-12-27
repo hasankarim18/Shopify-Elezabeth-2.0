@@ -1,4 +1,4 @@
-<div class="article py-8 mb-8">
+<article class="article py-8 mb-8">
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'title' %}
@@ -45,7 +45,94 @@
         <div class="mb-6"></div>
     {% endcase %}
   {% endfor %}
-</div>
+</article>
+{% if blog.comments_enabled? %}
+  <div class="add-comments pb-6">
+
+    <div class="container">
+      <h3 class="text-xl text-start font-semibold">Add Comment</h3>
+      <div class="w-full  ">
+        {% form 'new_comment' article %}
+          <div class="text-xl text-red-400">
+            {{ form.errors | default_errors }}</div>
+          {% if form.posted_successfully? %}
+            <div class="py-2 text-green-500 text-xl ">
+              Thank you for your comment!
+            </div>
+          {% endif %}
+          <div class="p-6 bg-blue-100 rounded-lg shadow-md">
+            <div class="flex gap-8">
+              <div class="name mb-4 w-full">
+
+                <input
+                  placeholder="Name"
+                  type="text"
+                  id="name"
+                  name="comment[author]"
+                  value="{{ form.author }}"
+                  class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+              <div class="email mb-4 w-full">
+                <input
+                  placeholder="Email"
+                  type="text"
+                  name="comment[email]"
+                  value="{{ form.email }}"
+                  class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+            </div>
+            <div class="comment mb-4">
+
+              <textarea
+                placeholder="Write Your comment"
+                name="comment[body]"
+                id="comment"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                rows="4">{{ form.body }}</textarea>
+            </div>
+            <div class="submit">
+              <input type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+
+{% endif %}
+
+{%- if article.comments != blank -%}
+  <div class="show-comments py-2 mb-8">
+
+    <ul class="comments-container flex flex-col gap-4 container">
+      {% paginate article.comments by 20 %}
+        {% for comment in article.comments %}
+          <li>
+            <div>
+              <span class="px-2">
+                Commented By:
+                <b>
+                  <i>{{ comment.author }}</i>
+                </b>
+              </span>
+              <span class="px-2">
+                @email:
+                <b>
+                  <i>{{ comment.email }}</i>
+                </b>
+              </span>
+            </div>
+            <div class="py-2 bg-gray-50">
+              {{ comment.body }}
+            </div>
+          </li>
+        {% endfor %}
+
+        {{- paginate | default_pagination -}}
+      {%- endpaginate -%}
+    </ul>
+  </div>
+{%- endif -%}
 
 <style>
   .article-content {
