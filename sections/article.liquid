@@ -1,65 +1,70 @@
-<div class="article">
-  <div class="container">
-    <div class="mb-6">
-      <a href="{{ blog.url }}">
-        {{ blog.title }}</a>
-      / {{ article.title }}
-    </div>
-    <h1 class="text-center text-3xl ">
-      {{ article.title }}
-    </h1>
-    {% comment %} article info {% endcomment %}
-    <div class="article-info mb-6 flex gap-4">
-      {% if section.settings.enable_author == true %}
-        <h3>Author:
-          <span>
-            <i>
-              {{ article.author }}</i>
+<div class="article py-8 mb-8">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'title' %}
+        <div class="article-title flex justify-center items-center flex-col mb-6">
+          <a href="{{ blog.url }}" class="uppercase font-bold text-blue-500 hover:text-blue-900 transition-all">{{ blog.title }}</a>
+          <h1 class="text-3xl font-bold text-center capitalize">
+            {{ article.title }}
+          </h1>
+        </div>
+      {% when 'article_author' %}
+        <div class="text-center mb-6">
+          <span class="uppercase font-semibold">Author:
+            <i>{{ article.author }}</i>
           </span>
-        </h3>
-      {% endif %}
-      {% if section.settings.enable_publish_date %}
-        <div>
-          Created At:
-          <i>
-            <time datetime="{{ article.created_at | date: '%B %d, %Y' }}">
-              {{ article.created_at | date: '%B %d, %Y' }}
-            </time>
-          </i>
         </div>
-      {% endif %}
-    </div>
-    {% comment %} tags {% endcomment %}
-    <div class="tags mb-6">
-      <b>tags</b>
-    </div>
-    {% comment %} article content {% endcomment %}
-    <div class="article-content mb-6">
-      {% if article.image != blank %}
-        <div class="float-left mr-4 mb-4">
-          <img
-            alt="{{ article.image.alt }}"
-            loading="lazy"
-            width="400"
-            height="400"
-            src="{{ article.image |  image_url }}">
+      {% when 'published_date' %}
+        <div class="date text-center mb-6">
+          <span class="capitalize">
+            Published: {{ article.published_at | date: '%b %d, %Y' }}</span>
         </div>
-      {% endif %}
-      <div class="">
-        {{ article.content }}</div>
-    </div>
-  </div>
+      {% when 'featured_image' %}
+        <div class="{% if block.settings.image_full_width == false %} container {% endif %} mb-6">
+          {% if article.image != blank %}
+            <img
+              src="{{ article.image |  image_url }}"
+              width=""
+              height=""
+              class="h-80 w-[100%]"
+              alt="">
+          {%- else -%}
+            {% comment %} {% assign backup_article_image = 'lifestyle-2' %} {% endcomment %}
+            {{ block.settings.placeholder_image | placeholder_svg_tag: 'h-80 w-[100%] mb-6' }}
+          {% endif %}
+
+        </div>
+      {% when 'article_content' %}
+        <div class="mb-6">
+          <div class="article-content container">
+            <b>Content:</b>
+            {{ article.content }}
+          </div>
+        </div>
+      {% else %}
+        <div class="mb-6"></div>
+    {% endcase %}
+  {% endfor %}
 </div>
 
 <style>
-  .article-content {}
-.article-content h2 {
-  font-weight: 700;
-  font-size: 24px;
-}
-.article-content p {
-  margin-bottom: 10px;
-}
+  .article-content {
+    overflow: hidden;
+  }
+  .article-content h2 {
+    font-weight: 700;
+    font-size: 24px;
+  }
+  .article-content img {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 50vh;
+    width: 30vw;
+  }
+  .article-content p {
+    margin-bottom: 10px;
+  }
 </style>
 
 {% schema %}
@@ -100,7 +105,30 @@
       {
         "type": "featured_image",
         "name": "Featured Image",
-        "limit": 1
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "image_full_width",
+            "label": "Iamge Full Width",
+            "default": false
+          },
+          {
+            "type": "select",
+            "id": "placeholder_image",
+            "label": "Select Placeholder image",
+            "options": [
+              {
+                "value": "lifestyle-1",
+                "label": "Lifestyle 1"
+              },
+              {
+                "value": "lifestyle-2",
+                "label": "Lifestyle 2"
+              }
+            ]
+          }
+        ]
       },
       {
         "type": "article_content",
