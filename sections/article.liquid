@@ -101,38 +101,6 @@
 
 {% endif %}
 
-{%- if article.comments != blank -%}
-  <div class="show-comments py-2 mb-8">
-
-    <ul class="comments-container flex flex-col gap-4 container">
-      {% paginate article.comments by 20 %}
-        {% for comment in article.comments %}
-          <li>
-            <div>
-              <span class="px-2">
-                Commented By:
-                <b>
-                  <i>{{ comment.author }}</i>
-                </b>
-              </span>
-              <span class="px-2">
-                @email:
-                <b>
-                  <i>{{ comment.email }}</i>
-                </b>
-              </span>
-            </div>
-            <div class="py-2 bg-gray-50">
-              {{ comment.body }}
-            </div>
-          </li>
-        {% endfor %}
-
-        {{- paginate | default_pagination -}}
-      {%- endpaginate -%}
-    </ul>
-  </div>
-{%- endif -%}
 
 <style>
   .article-content {
