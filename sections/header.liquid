@@ -1,5 +1,5 @@
 {%- if section.settings.menu == blank -%}
-  {% assign main_meny_linklists = linklists.backup-menu.links %}
+  {% assign main_meny_linklists = linklists.main-menu.links %}
 {%- else -%}
   {% assign main_meny_linklists = linklists[section.settings.menu].links %}
 {%- endif -%}

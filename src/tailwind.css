@@ -7,3 +7,9 @@
     @apply max-w-7xl mx-auto my-0;
   }
 }
+
+@layer base {
+  a {
+    @apply text-blue-400 hover:text-blue-600 transition-colors;
+  }
+}

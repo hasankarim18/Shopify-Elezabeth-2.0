@@ -1,0 +1,9 @@
+{
+  "name": "Article blog post",
+  "sections": {
+    "template-blog-post": {
+      "type": "article"
+    }
+  },
+  "order": ["template-blog-post"]
+}

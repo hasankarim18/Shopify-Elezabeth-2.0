@@ -1,0 +1,20 @@
+<div class="default-blog">
+  <div class="container">
+    <h1 class="text-center text-3xl">Default blog</h1>
+    {% comment %} articles {% endcomment %}
+    <div class="mt-4">
+      <ul>
+        {% for article in blogs.news.articles %}
+          <li class="border p-4 rounded-xl mb-4">
+
+            <h2 class="text-2xl font-bold">{{ article.title }}</h2>
+            <a class="inline-block mt-2" href="{{ article.url }}">
+              Read more
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+</div>

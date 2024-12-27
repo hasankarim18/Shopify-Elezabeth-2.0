@@ -1,0 +1,9 @@
+{
+  "name": "Blogs",
+  "sections": {
+    "template-blog": {
+      "type": "default-blog"
+    }
+  },
+  "order": ["template-blog"]
+}
