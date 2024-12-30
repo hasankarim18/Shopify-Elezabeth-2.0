@@ -1,0 +1,30 @@
+{%- if article.comments_count > 0 -%}
+  <div class="show_comments container pt-4 pb-12">
+    <div class="bg-blue-100 p-6">
+      <div class="flex justify-between flex-col md:flex-row ">
+        <h2 class="text-lg font-bold mb-4 text-center md:text-left">Comments</h2>
+        <h3 class="text-lg text-blue-500 text-center md:text-left">Number of comments: {{ article.comments_count }}</h3>
+      </div>
+      {% paginate article.comments by 12 %}
+        {% for comment in article.comments %}
+          <div class="flex mb-4 flex-col space-y-4">
+            <div class="bg-white p-4 rounded-lg shadow-md">
+              <h3 class="text-lg font-bold">{{ comment.author }}</h3>
+              <p class="text-gray-700 text-sm mb-2">@{{ comment.email }}</p>
+              <p class="text-gray-700 text-sm mb-2">Published at: {{ comment.created_at | date: "%b %d, %y" }}</p>
+
+              <p class="text-gray-700">
+                {{ comment.content }}
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+      {% endpaginate %}
+
+    </div>
+  </div>
+{%- else -%}
+  <h3 class="pt-4 pb-12 text-center text-3xl font-semibold text-blue-600">
+    There are no comments to show
+  </h3>
+{%- endif -%}

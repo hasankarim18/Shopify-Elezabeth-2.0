@@ -1,51 +1,63 @@
-{% if article.comments != blank %}
-  <div class="container show-comments py-6 mb-8 bg-white shadow rounded-lg">
-    <div>
-      <span class="px-2">Total comments: {{ article.comments.size }}</span>
-    </div>
-    <ul class="comments-container flex flex-col gap-6 p-4">
-      {% paginate article.comments by 20 %}
-        {% for comment in article.comments %}
-          <li class="border-b border-gray-200 pb-4">
-            <div class="text-sm text-gray-600 mb-2">
-              {% for block in section.blocks %}
-                {% case block.type %}
-                  {% when "c_author" %}
-                    <div class="px-2 font-medium">
-                      Commented By:
-                      <b class="text-gray-800">
-                        <i>{{ comment.author }}</i>
-                      </b>
-                    </div>
-                  {% when "c_email" %}
-                    <div class="px-2">
-                      @email:
-                      <b class="text-gray-800">
-                        <i>{{ comment.email }}</i>
-                      </b>
-                    </div>
-                  {% when "c_content" %}
-                    <div class="py-4 bg-gray-200 text-blue-950 rounded-md px-4">
-                      {{ comment.content | default: "Comment body is missing!" }}
-                    </div>
-                  {% else %}
-                    <div>
-                      Nothing to show</div>
-                {% endcase %}
-              {% endfor %}
-            </div>
-          </li>
-        {% endfor %}
+{% if blog.comments_enabled? %}
 
-        <div class="mt-4">
-          {{ paginate | default_pagination }}
-        </div>
-      {% endpaginate %}
-    </ul>
-  </div>
+
+  {% if article.comments != blank %}
+    <div class="container show-comments py-6 mb-8 bg-white shadow rounded-lg">
+      <div>
+        <span class="px-2">Total comments: {{ article.comments.size }}</span>
+      </div>
+      <ul class="comments-container flex flex-col gap-6 p-4">
+        {% paginate article.comments by 12 %}
+          {% for comment in article.comments %}
+            <li class="border-b border-gray-200 pb-4">
+              <div class="text-sm text-gray-600 mb-2">
+                {% for block in section.blocks %}
+                  {% case block.type %}
+                    {% when "c_author" %}
+                      <div class="px-2 font-medium">
+                        Commented By:
+                        <b class="text-gray-800">
+                          <i>{{ comment.author }}</i>
+                        </b>
+                      </div>
+                    {% when "c_email" %}
+                      <div class="px-2">
+                        @email:
+                        <b class="text-gray-800">
+                          <i>{{ comment.email }}</i>
+                        </b>
+                      </div>
+                    {% when "c_content" %}
+                      <div class="py-4 bg-gray-200 text-blue-950 rounded-md px-4">
+                        {{ comment.content | default: "Comment body is missing!" }}
+                      </div>
+                    {% else %}
+                      <div>
+                        Nothing to show</div>
+                  {% endcase %}
+                {% endfor %}
+              </div>
+            </li>
+          {% endfor %}
+          {%- if paginate.pages > 1 -%}
+            <div class="mt-4">
+              {{ paginate | default_pagination }}
+            </div>
+          {%- endif -%}
+
+        {% endpaginate %}
+      </ul>
+    </div>
+
+  {%- else -%}
+    <h3 class="py-4 text-center text-2xl font-semibold ">No comments to show</h3>
+  {% endif %}
 
 {%- else -%}
-  <h3 class="py-4 text-center text-2xl font-semibold ">No comments to show</h3>
+  <h3 class="pt-4 pb-12 text-center text-3xl font-semibold text-red-600">
+    Comments are diabled!!!
+  </h3>
+
 {% endif %}
 
 {% schema %}

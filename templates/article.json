@@ -23,18 +23,7 @@
       "block_order": ["title", "author", "date", "image", "content"]
     },
     "comments": {
-      "type": "article-comments",
-      "blocks": {
-        "author": {
-          "type": "c_author"
-        },
-        "author_email": {
-          "type": "c_email"
-        },
-        "content": {
-          "type": "c_content"
-        }
-      }
+      "type": "article-comments"
     }
   },
   "order": ["main", "comments"]

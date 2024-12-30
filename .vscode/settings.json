@@ -10,5 +10,8 @@
   "[liquid-css]": {
     "editor.defaultFormatter": "sissel.shopify-liquid",
     "editor.formatOnSave": true
-  }
+  },
+  "window.zoomLevel": -0.7,
+  "editor.stickyScroll.enabled": false,
+  "editor.wordWrap": "on"
 }
