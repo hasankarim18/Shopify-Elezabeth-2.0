@@ -10,10 +10,11 @@
   {{ content_for_header }}
     <!-- Header hook for plugins -->
     {{ 'application.css' | asset_url | stylesheet_tag }}
+    {{ 'styles.css' | asset_url | stylesheet_tag }}
     <script defer src="{{'application.js' | asset_url }}"></script>
     {% comment %} {{ 'application.js' | asset_url | script_tag }} 
-                           
-                                             {% endcomment %}
+                             
+                                                 {% endcomment %}
     {% comment %} <script defer src="{{ 'alpine.min.js' |  asset_url }}"></script> {% endcomment %}
     {% comment %} <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> {% endcomment %}
     <script defer src="{{ 'alpine.min.js' |  asset_url }}"></script>

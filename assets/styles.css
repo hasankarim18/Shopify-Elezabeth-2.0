@@ -1,0 +1,76 @@
+/* Pagination Container */
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+/* Pagination Buttons */
+.pagination span a {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  color: #0077cc;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.pagination span a {
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+}
+
+/* Hover and Focus States */
+
+.pagination span a:hover {
+  background-color: #0077cc;
+  color: #fff;
+}
+
+/* Current Page */
+.pagination .current {
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0077cc;
+  color: #fff;
+  border-color: #0077cc;
+  pointer-events: none; /* Disable click */
+}
+
+/* Next and Previous Buttons */
+.pagination .next a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  font-weight: bold;
+}
+.pagination .prev a {
+  display: inline-block;
+  width: 100px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+}
+
+.pagination .next a {
+  text-decoration: none;
+}
+
+.pagination .next:hover a {
+  color: #fff;
+}
