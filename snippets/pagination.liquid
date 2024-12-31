@@ -1,0 +1,105 @@
+{% if paginate.pages > 0 %}
+  <div class="">
+    <div class="pagination {{class_lists}} ">
+      <nav
+        class="flex font-semibold gap-2"
+        justify-center
+        role="navigation">
+        {% if paginate.previous.url != blank %}
+          <a class="border-2 hover:bg-blue-200  h-[40px] flex justify-center items-center p-2" href="{{ paginate.previous.url }}">{{ paginate.previous.title }}</a>
+        {% endif %}
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a class="border-2 hover:bg-blue-200 w-[40px] h-[40px] flex justify-center items-center border-t-2 border-b-2 p-2" href="{{ part.url }}">{{ part.title }}</a>
+          {% else %}
+            <span class=" bg-blue-400 text-white w-[40px] h-[40px] flex justify-center items-center border-2 p-2">{{ part.title }}</span>
+          {% endif %}
+        {% endfor %}
+        {% if paginate.next.url %}
+          <a class="border-2 h-[40px] hover:bg-blue-200 flex justify-center items-center p-2" href="{{ paginate.next.url }}">{{ paginate.next.title }}</a>
+        {% endif %}
+
+      </nav>
+    </div>
+  </div>
+{% endif %}
+
+<style>
+  /* Pagination Container */
+  .pagination {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  /* Pagination Buttons */
+  .pagination span a {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: #0077cc;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .pagination span a {
+    text-decoration: none;
+    color: inherit;
+    border-radius: 10px;
+  }
+
+  /* Hover and Focus States */
+
+  .pagination span a:hover {
+    background-color: #0077cc;
+    color: #fff;
+  }
+
+  /* Current Page */
+  .pagination .current {
+    border-radius: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0077cc;
+    color: #fff;
+    border-color: #0077cc;
+    pointer-events: none;
+    /* Disable click */
+  }
+
+  /* Next and Previous Buttons */
+  .pagination .next a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    font-weight: bold;
+  }
+  .pagination .prev a {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+  }
+
+  .pagination .next a {
+    text-decoration: none;
+  }
+
+  .pagination .next:hover a {
+    color: #fff;
+  }
+
+</style>
