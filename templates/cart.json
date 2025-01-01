@@ -1,0 +1,10 @@
+{
+  "name": "Template Cart",
+  "wrapper": "section#template-cart.temp-cart",
+  "sections": {
+    "template": {
+      "type": "template-cart"
+    }
+  },
+  "order": ["template"]
+}

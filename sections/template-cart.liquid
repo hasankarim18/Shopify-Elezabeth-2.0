@@ -1,0 +1,129 @@
+<div class="container">
+  {% if cart.item_count > 0 %}
+    <div class="p-4 max-w-6xl flex flex-col mx-auto">
+      <div class="flex items-end justify-between my-5">
+        <h1 class="text-3xl">Your cart: {{ cart.item_count }}
+        </h1>
+        <a href="{{ routes.all_products_collection_url }}" class="text-blue-600 hover:text-blue-800 font-medium">Continue shopping</a>
+      </div>
+      <div class="py-6">
+        <form
+          action="{{ routes.cart_url }}"
+          method="post"
+          novalidate>
+          <table class="table-auto divide-y divide-indigo-900 my-4 w-full">
+            <thead>
+              <th class="px-6 py-3 text-left text-sm font-medium text-gray-500">Product</th>
+              <th class="px-6 py-3 text-left text-sm font-medium text-gray-500">Quantity</th>
+              <th class="px-6 py-3 text-left text-sm font-medium text-gray-500">Total Price</th>
+            </thead>
+            <tbody>
+              {% for item in cart.items %}
+                <tr class="table-row ">
+                  <td class="py-2">
+                    <div class="flex flex-col">
+                      <a href="{{ item.url }}">
+                        {% if item.image %}
+                          <img
+                            class="w-20 h-20 object-cover border"
+                            src="{{ item.image |  image_url: width:'100', height:"100"  }}"
+                            width=""
+                            height=""
+                            alt="{{ item.title |  escape }}">
+                        {%- else -%}
+                          {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20 object-cover border' }}
+                        {% endif %}
+                      </a>
+                      <a class="text-black inline-block mt-2 hover:text-indigo-700" href="{{ item.url }}">{{ item.product.title | truncatewords: 5 }}</a>
+
+                      <span class="text-sm text-gray-500 my-1">{{ item.variant.title }}</span>
+                      {% comment %} manual remove {% endcomment %}
+                      <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" class="text-sm font-medium text-red-500">
+                        Remove Manual
+                      </a>
+                      <a href="{{ item.url_to_remove }}">
+                        {% render 'icon-trash'
+                          , class: 'w-8 text-black hover:text-red-400' %}
+                      </a>
+                    </div>
+                  </td>
+
+                  <td class="py-4 px-2">
+                    <input
+                      name="updates[]"
+                      min="1"
+                      id="updates_{{ forloop.index }}"
+                      class="border-2 w-20 p-2 text-center"
+                      type="number"
+                      value="{{ item.quantity  }}">
+                  </td>
+                  <td>
+                    <span>{{ item.final_line_price | money }}</span>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <div class="flex flex-col md:flex-row item-center justify-between">
+            <div class="w-full my-4">
+              <div class="flex flex-col items start">
+                <label class="my-1" for="cart_notes">Cart Notes</label>
+                <textarea
+                  class="w-full md:max-w-lg resize-none h-20 border-2 p-2"
+                  name="note"
+                  id="cart_notes"></textarea>
+              </div>
+            </div>
+            <div class="w-full my-4 md:w-80">
+              <h3 class="text-xl">Subtotal: {{ cart.total_price | money }}</h3>
+              <div class="my-2">
+                <button
+                  name="update"
+                  type="submit"
+                  class="w-full cursor-pointer p-3 border border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white">Update</button>
+              </div>
+              <div class="my-2  ">
+
+                <input
+                  name="checkout"
+                  type="submit"
+                  value="Checkout"
+                  class="border p-3 cursor-pointer border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white w-full ">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  {%- else -%}
+    <div class="">
+      <h2 class="text-3xl text-center text-gray-800 capitalize">
+        {{ section.settings.title }}
+      </h2>
+      <div class="flex gap-4 justify-center mt-8">
+        <a class="inline-block px-8 py-4 bg-gray-500 hover:bg-gray-600 text-white text-2xl capitalize rounded-md hover:text-white" href="{{ routes.root_url }}">Back to Home page</a>
+        <a class="inline-block px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white text-2xl capitalize rounded-md hover:text-white" href="{{ routes.all_products_collection_url }}">Continue Shopping</a>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Template cart",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Page title",
+        "default": "Your cart is empty"
+      },
+      {
+        "type": "url",
+        "id": "url",
+        "label": "Give Url"
+      }
+    ]
+  }
+{% endschema %}

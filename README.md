@@ -33,6 +33,14 @@ module.exports = {
 
 ```
 
+# Remove a cart line item manually
+
+```
+ <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"">
+      Remove Manual
+  </a>
+```
+
 - only the content portion is changed other wise not working properly, it will purge all the file
 
 [![Generic badge](https://img.shields.io/badge/course%20available%3F-yes-green.svg)](https://shields.io/)
