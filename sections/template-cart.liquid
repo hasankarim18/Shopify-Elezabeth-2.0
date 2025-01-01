@@ -75,21 +75,27 @@
               </div>
             </div>
             <div class="w-full my-4 md:w-80">
-              <h3 class="text-xl">Subtotal: {{ cart.total_price | money }}</h3>
-              <div class="my-2">
-                <button
-                  name="update"
-                  type="submit"
-                  class="w-full cursor-pointer p-3 border border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white">Update</button>
-              </div>
-              <div class="my-2  ">
-
-                <input
-                  name="checkout"
-                  type="submit"
-                  value="Checkout"
-                  class="border p-3 cursor-pointer border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white w-full ">
-              </div>
+              {% for block in section.blocks %}
+                {% case block.type %}
+                  {% when "subtotal" %}
+                    <h3 class="text-xl">Subtotal: {{ cart.total_price | money }}</h3>
+                  {% when "update_button" %}
+                    <div class="my-2">
+                      <button
+                        name="update"
+                        type="submit"
+                        class="w-full cursor-pointer p-3 border border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white">Update</button>
+                    </div>
+                  {% when "checkout_button" %}
+                    <div class="my-2  ">
+                      <input
+                        name="checkout"
+                        type="submit"
+                        value="Checkout"
+                        class="border p-3 cursor-pointer border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white w-full ">
+                    </div>
+                {% endcase %}
+              {% endfor %}
             </div>
           </div>
         </form>
@@ -123,6 +129,23 @@
         "type": "url",
         "id": "url",
         "label": "Give Url"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "subtotal",
+        "name": "Subtotal",
+        "limit": 1
+      },
+      {
+        "type": "update_button",
+        "name": "Update Button",
+        "limit": 1
+      },
+      {
+        "type": "checkout_button",
+        "name": "Checkout Button",
+        "limit": 1
       }
     ]
   }

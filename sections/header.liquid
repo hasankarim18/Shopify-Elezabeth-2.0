@@ -50,9 +50,9 @@
                 <div class="shadow-lg border ring-black ring-opacity-5 overflow-hidden rounded-lg">
                   <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                     {% for childlink in link.links %}
-                      <a href="{{ childlink.url }}" class="-m-3 p-3 flex items start rounded-lg hover:bg-gray-100">
+                      <a href="{{ childlink.url }}" class="-m-3 p-3 font-semibold flex items start rounded-lg hover:bg-gray-100">
                         <div class="ml-4">
-                          <p class="text-gray-900 text-base font-medium">
+                          <p class="text-gray-900 text-base font-semibold">
                             {{ childlink.title }}
                           </p>
                         </div>
@@ -65,7 +65,7 @@
             </div>
           {%- else -%}
             <div class="relative">
-              <a href="{{ link.url }}" class="text-base text-gray-500 hover:text-gray-900">{{ link.title }}</a>
+              <a href="{{ link.url }}" class="text-base font-semibold text-gray-600  hover:text-red-600">{{ link.title }}</a>
             </div>
           {% endif %}
         {% endfor %}
@@ -79,8 +79,10 @@
           <span class="absolute -top-2 -right-4 w-6 h-6 bg-red-500 rounded-full flex justify-center items-center font-bold text-white text-sm">{{ cart.item_count }}</span>
         </div>
         {% if shop.customer_accounts_enabled == true %}
-          <a href="{{ routes.account_login_url }}" class="text-base text-gray-500 hover:text-gray-900">Login</a>
-          <a href="{{ routes.account_register_url }}" class="text-base text-gray-500 hover:text-gray-900">Register</a>
+          <a href="{{ routes.account_login_url }}" class="font-semibold text-gray-600 hover:text-red-600">
+            Login
+          </a>
+          <a href="{{ routes.account_register_url }}" class="font-semibold text-gray-600 hover:text-red-600">Register</a>
         {% endif %}
 
       </div>
