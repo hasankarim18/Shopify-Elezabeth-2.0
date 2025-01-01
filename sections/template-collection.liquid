@@ -1,9 +1,9 @@
-<div class="container my-4">
+<div class="container mt-4 mb-12">
   <h3 class="py-4 text-3xl text-indigo-600">
     {{ collection.title }}
   </h3>
   {% if collection.products_count > 0 %}
-    {% paginate collection.products by 3 %}
+    {% paginate collection.products by section.settings.products_per_page %}
       <ul class="w-fit gap-4 mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center ">
 
         {% for product in collection.products %}
@@ -11,9 +11,10 @@
             , product: product %}
         {% endfor %}
       </ul>
-      <div class="mt-4">
+      <div class="mt-8">
         {% render 'pagination'
-          , paginate: paginate %}
+          , paginate: paginate
+          , section: section %}
       </div>
     {% endpaginate %}
   {%- else -%}
@@ -21,6 +22,40 @@
       No product available in this collection
     </h2>
   {% endif %}
-
-
 </div>
+
+{% schema %}
+  {
+    "name": "Template Collection",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "range",
+        "default": 6,
+        "id": "products_per_page",
+        "label": "Produt per page",
+        "min": 3,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "type": "checkbox",
+        "default": true,
+        "id": "show_vendor",
+        "label": "Show Vendor"
+      },
+      {
+        "type": "checkbox",
+        "default": true,
+        "id": "show_addtocart",
+        "label": "Show Add To Cart"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Template Collection",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
