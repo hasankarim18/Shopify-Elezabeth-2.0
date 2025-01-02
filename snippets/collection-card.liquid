@@ -1,6 +1,6 @@
 <div class="product-card">
 
-  <div class="w-72 bg-white shadow-md rounded-xl duration-500 ease-in-out hover:scale-105 hover:shadow-xl">
+  <div class="w-72 bg-white shadow-md rounded-xl duration-500 ease-in-out hover:scale-105 hover:shadow-xl overflow-hidden">
     <a class="group duration-500 transition-all ease-in-out" href="{{ collection.url }}">
       {% if collection.featured_image != blank %}
         <img
@@ -9,7 +9,7 @@
           height=""
           src="{{ collection.featured_image |  image_url }}"
           alt="{{ collection.title }}"
-          class="h-80 w-72 object-cover rounded-t-xl" />
+          class="h-80 w-72 object-cover rounded-t-xl transition duration-500 ease-in-out transform hover:scale-105" />
       {% elsif collection.featured_image == blank and collection.products.first.image != blank %}
         <img
           loading="lazy"

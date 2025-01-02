@@ -6,7 +6,8 @@
     <div class="my-8">
       {% paginate collections by 8 %}
         <ul class="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-          {% for collection in collections %}
+          {% assign sorted_collection = collections | sort: 'title' %}
+          {% for collection in sorted_collection %}
             {% if collection.all_products_count > 0 %}
               <li>
                 {% render 'collection-card'

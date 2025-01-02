@@ -6,7 +6,13 @@
   {% else %}
     {% assign collection_image = '' %}
   {% endif %}
-
+  <div class="mb-2 flex justify-start items-center">
+    <a class="text-sm font-bold text-indigo-500 hover:text-indigo-800 transition-all" href="{{ routes.collections_url }}">Collections</a>
+    <span class="font-semibold mx-2">
+      /
+    </span>
+    <span class="text-sm text-indigo-800 font-bold transition-all">{{ collection.title }}</span>
+  </div>
   <div style="background-image: url('{{ collection_image }}'); background-size: cover;
     background-position: center;
     background-repeat: no-repeat;" class="h-80 w-full collection-bg relative flex justify-center items-center ">
@@ -14,6 +20,8 @@
       {{ collection.title }}
     </h3>
   </div>
+
+
   <div class="mt-8">
     {% if collection.products_count > 0 %}
       {% paginate collection.products by section.settings.products_per_page %}
@@ -39,11 +47,55 @@
   </div>
 </div>
 
+<style>
+  .collection-bg {
+
+    position: relative;
+    z-index: 1;
+  }
+
+  .collection-bg::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: {{ section.settings.background_layer_color }};
+    opacity: {{ section.settings.background_layer_opacity }};
+    left: 0;
+    top: 0;
+    position: absolute;
+  }
+
+  .collection-bg h3 {
+    padding: 10px 30px;
+    background-color: black;
+    border-radius: 5px;
+    position: relative;
+    z-index: 3;
+    color: white !important;
+  }
+
+</style>
+
 {% schema %}
   {
     "name": "Template Collection",
     "tag": "section",
     "settings": [
+      {
+        "type": "color",
+        "id": "background_layer_color",
+        "label": "Choose the Banner Bg"
+      },
+      {
+        "type": "range",
+        "id": "background_layer_opacity",
+        "label": "Bg Layer Opacity",
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "default": 0.5
+      },
       {
         "type": "range",
         "default": 6,
