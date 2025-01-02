@@ -1,11 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "name": "Template Collection",
   "wrapper": "div.template-collection",
   "sections": {
     "template-collection": {
       "type": "template-collection",
-      "settings": {}
+      "settings": {
+        "background_layer_color": "#685757",
+        "background_layer_opacity": 0.5,
+        "products_per_page": 6,
+        "show_vendor": true,
+        "show_addtocart": false
+      }
     }
   },
-  "order": ["template-collection"]
+  "order": [
+    "template-collection"
+  ]
 }
