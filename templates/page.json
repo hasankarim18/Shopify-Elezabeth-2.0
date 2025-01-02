@@ -13,47 +13,9 @@
       "type": "templage-page",
       "disabled": true,
       "settings": {}
-    },
-    "section_contact_form_9f8b6L": {
-      "type": "section-contact-form",
-      "blocks": {
-        "section_title_QqAKUf": {
-          "type": "section-title",
-          "settings": {
-            "section_title": "Section Contact From",
-            "title_align": "text-center"
-          }
-        },
-        "contact_form_3zN8LV": {
-          "type": "contact-form",
-          "settings": {
-            "form_sub_title": "Contact",
-            "form_title_white": "Get in",
-            "form_title_accent": "touch",
-            "title_accent": "#4f46e5",
-            "contact_message": "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem",
-            "address": "House #14, Street #12, Eskaton Road, Dhaka, Bangladesh.",
-            "phone": "+88*******",
-            "office_hour": "24/7",
-            "first_name": "First Name",
-            "last_name": "last name",
-            "email": "Email",
-            "message": "Your message"
-          }
-        }
-      },
-      "block_order": [
-        "section_title_QqAKUf",
-        "contact_form_3zN8LV"
-      ],
-      "settings": {
-        "padding_top": 10,
-        "padding_botton": 10
-      }
     }
   },
   "order": [
-    "template",
-    "section_contact_form_9f8b6L"
+    "template"
   ]
 }
