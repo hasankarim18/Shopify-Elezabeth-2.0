@@ -11,11 +11,8 @@
   "sections": {
     "template": {
       "type": "templage-page",
-      "disabled": true,
       "settings": {}
     }
   },
-  "order": [
-    "template"
-  ]
+  "order": ["template"]
 }
