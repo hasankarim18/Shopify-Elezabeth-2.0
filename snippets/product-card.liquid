@@ -4,6 +4,7 @@
     <a class="group" href="{{ product.url }}">
       {% if product.featured_image != blank %}
         <img
+          loading="lazy"
           width=""
           height=""
           src="{{ product.featured_image |  image_url }}"

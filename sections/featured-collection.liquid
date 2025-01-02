@@ -16,6 +16,10 @@
           {% render 'product-card'
             , product: product
             , section %}
+        {% else %}
+          {% for item in (1..4) %}
+            {% render 'product-card-placeholder' %}
+          {% endfor %}
         {% endfor %}
       </ul>
     </div>
@@ -36,8 +40,7 @@
       {
         "type": "text",
         "id": "section_title",
-        "label": "Section Title",
-        "default": "Featured Collection"
+        "label": "Section Title"
       },
       {
         "type": "checkbox",

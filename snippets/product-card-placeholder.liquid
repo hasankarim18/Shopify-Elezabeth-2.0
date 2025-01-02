@@ -1,0 +1,41 @@
+<div class="product-card">
+
+  <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+    <a class="group" href="{{ product.url }}">
+      {{ 'product-1' | placeholder_svg_tag: 'h-80 w-72 object-cover rounded-t-xl' }}
+
+        <div class="px-4 py-3 w-72">
+
+        <span class="text-gray-400 mr-3 uppercase text-xs">Vendor</span>
+
+
+        <p class="text-lg font-bold text-black truncate child group-hover:text-red-500 transition-all  block capitalize">Product title</p>
+        {% comment %} product info {% endcomment %}
+        <div class="flex flex-col items-start">
+          <div class="flex justify-start items-center">
+            <p class="text-lg font-semibold text-black cursor-auto my-3">$100</p>
+
+            <del>
+              <p class="text-sm text-gray-600 cursor-auto ml-2">
+                $120
+              </p>
+            </del>
+
+          </div>
+        {% comment %} prduct info {% endcomment %}
+        </div>
+      </div>
+    </a>
+    {% comment %} add to cart {% endcomment %}
+    <div class=" p-2 w-full">
+      <a href="#" class="flex group hover:text-white w-full items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white transition-all  focus:outline-none focus:ring-4 focus:ring-blue-300">
+        <span class="inline-block group-hover:mr-1 cart-icon transition-all">
+          {% render 'icon-cart2'
+            , class: 'w-6 h-6' %}
+        </span>
+        <span class="inline-block addtocartext group-hover:ml-1 transition-all group-hover:text-red-500 child">
+          Add to cart</span>
+      </a>
+    </div>
+  </div>
+</div>

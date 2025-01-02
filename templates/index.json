@@ -4,7 +4,8 @@
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "selected_collection": "all"
+        "selected_collection": "all",
+        "section_title": "Fc"
       }
     }
   },
