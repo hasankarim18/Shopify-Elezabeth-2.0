@@ -1,0 +1,64 @@
+{% assign selected_collection = section.settings.selected_collection %}
+<div class="featured-collection my-8">
+  <div class="container">
+    <h2 class="text-xl">{{ section.settings.section_title }}</h2>
+    <p class="mb-2 font-semibold text-indigo-800">
+      <a class="hover:text-red-500 " href="{{ routes.collections_url }}">
+        Collections</a>
+      <span>/</span>
+      <a class="hover:text-red-500 " href="{{ selected_collection.url }}">
+        {{ selected_collection.title }}</a>
+    </p>
+    {% comment %} product grid {% endcomment %}
+    <div>
+      <ul class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {% for product in selected_collection.products limit: section.settings.product_limit %}
+          {% render 'product-card'
+            , product: product
+            , section %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Featured Collection",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "selected_collection",
+        "label": "Select a collections"
+      },
+      {
+        "type": "text",
+        "id": "section_title",
+        "label": "Section Title",
+        "default": "Featured Collection"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_addtocart",
+        "label": "Show Add To Cart"
+      },
+      {
+        "type": "range",
+        "id": "product_limit",
+        "default": 4,
+        "max": 12,
+        "min": 1,
+        "label": "Product Limit",
+        "step": 1
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Collection",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
