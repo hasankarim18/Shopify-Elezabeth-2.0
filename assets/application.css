@@ -651,6 +651,10 @@ button {
   z-index: 10;
 }
 
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -821,11 +825,6 @@ button {
 
 .hidden {
   display: none;
-}
-
-.size-6 {
-  width: 1.5rem;
-  height: 1.5rem;
 }
 
 .h-20 {
@@ -1369,10 +1368,6 @@ button {
   padding-top: 1rem;
 }
 
-.pb-2 {
-  padding-bottom: 0.5rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -1557,11 +1552,6 @@ button {
   color: rgb(220 38 38 / var(--tw-text-opacity, 1));
 }
 
-.text-red-700 {
-  --tw-text-opacity: 1;
-  color: rgb(185 28 28 / var(--tw-text-opacity, 1));
-}
-
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
@@ -1646,10 +1636,6 @@ button {
 
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hover\:ml-2:hover {
-  margin-left: 0.5rem;
 }
 
 .hover\:-translate-y-1:hover {
@@ -1787,12 +1773,12 @@ button {
   margin-left: 0.25rem;
 }
 
-.group:hover .group-hover\:mr-1 {
-  margin-right: 0.25rem;
-}
-
 .group:hover .group-hover\:ml-2 {
   margin-left: 0.5rem;
+}
+
+.group:hover .group-hover\:mr-1 {
+  margin-right: 0.25rem;
 }
 
 .group:hover .group-hover\:translate-x-0 {

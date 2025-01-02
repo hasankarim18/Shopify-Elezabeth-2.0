@@ -1,27 +1,42 @@
 <div class="container mt-4 mb-12">
-  <h3 class="py-4 text-3xl text-indigo-600">
-    {{ collection.title }}
-  </h3>
-  {% if collection.products_count > 0 %}
-    {% paginate collection.products by section.settings.products_per_page %}
-      <ul class="w-fit gap-4 mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center ">
-
-        {% for product in collection.products %}
-          {% render 'product-card'
-            , product: product %}
-        {% endfor %}
-      </ul>
-      <div class="mt-8">
-        {% render 'pagination'
-          , paginate: paginate
-          , section: section %}
-      </div>
-    {% endpaginate %}
-  {%- else -%}
-    <h2 class="text-center text-4xl font-semibold text-indigo-600">
-      No product available in this collection
-    </h2>
+  {% if collection.featured_image != blank %}
+    {% assign collection_image = collection.featured_image | image_url %}
+  {% elsif collection.featured_image == blank and collection.products.first.image != blank %}
+    {% assign collection_image = collection.products.first.image | image_url %}
+  {% else %}
+    {% assign collection_image = '' %}
   {% endif %}
+
+  <div style="background-image: url('{{ collection_image }}'); background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;" class="h-80 w-full collection-bg relative flex justify-center items-center ">
+    <h3 class="py-4 text-3xl text-indigo-600 relative">
+      {{ collection.title }}
+    </h3>
+  </div>
+  <div class="mt-8">
+    {% if collection.products_count > 0 %}
+      {% paginate collection.products by section.settings.products_per_page %}
+        <ul class="w-fit gap-4 mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center ">
+
+          {% for product in collection.products %}
+            {% render 'product-card'
+              , product: product
+              , collection_image: collection_image %}
+          {% endfor %}
+        </ul>
+        <div class="mt-8">
+          {% render 'pagination'
+            , paginate: paginate
+            , section: section %}
+        </div>
+      {% endpaginate %}
+    {%- else -%}
+      <h2 class="text-center text-4xl font-semibold text-indigo-600">
+        No product available in this collection
+      </h2>
+    {% endif %}
+  </div>
 </div>
 
 {% schema %}

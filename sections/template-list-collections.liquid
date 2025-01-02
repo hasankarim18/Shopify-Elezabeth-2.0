@@ -1,16 +1,30 @@
 <div class="template-list-collections">
   <div class="container">
     <h2 class="text-4xl">
-      template-list-collections
+      {{ section.settings.title }}
     </h2>
     <div class="my-8">
       {% paginate collections by 8 %}
         <ul class="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
           {% for collection in collections %}
-            <li>
-              {% render 'collection-card'
-                , collection: collection %}
-            </li>
+            {% if collection.all_products_count > 0 %}
+              <li>
+                {% render 'collection-card'
+                  , collection: collection %}
+              </li>
+            {% else %}
+              <li class="col-span-1">
+                {% render 'collection-card'
+                  , collection: collection %}
+              </li>
+            {% endif %}
+
+          {% else %}
+            {% for item in (1..6) %}
+              <li>
+                {% render 'collection-card-placeholder' %}
+              </li>
+            {% endfor %}
           {% endfor %}
         </ul>
 
@@ -22,3 +36,23 @@
     </div>
   </div>
 </div>
+
+{% schema %}
+  {
+    "name": "All Collection",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section Title"
+      }
+    ],
+    "presets": [
+      {
+        "name": "All Collection",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
