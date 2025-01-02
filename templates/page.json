@@ -1,0 +1,10 @@
+{
+  "name": "Template page",
+  "sections": {
+    "template": {
+      "type": "templage-page",
+      "settings": {}
+    }
+  },
+  "order": ["template"]
+}
