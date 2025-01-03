@@ -1,21 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "templage": {
       "type": "template-page",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "show_page_title": true,
+        "show_page_content": true
+      }
     },
     "contact-form": {
       "type": "contact-form-1",
       "blocks": {
         "section-title": {
-          "type": "section-title"
+          "type": "section-title",
+          "disabled": true,
+          "settings": {
+            "section_title": "Section Contact From",
+            "title_align": "text-center"
+          }
         },
         "contact-form": {
-          "type": "contact-form"
+          "type": "contact-form",
+          "settings": {
+            "form_sub_title": "Contact",
+            "form_title_white": "Get in",
+            "form_title_accent": "touch",
+            "title_accent": "#4f46e5",
+            "contact_message": "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem",
+            "address": "House #14, Street #12, Eskaton Road, Dhaka, Bangladesh.",
+            "phone": "+88*******",
+            "office_hour": "24/7",
+            "first_name": "First Name",
+            "last_name": "last name",
+            "email": "Email",
+            "message": "Your message"
+          }
         }
       },
-      "block_order": ["section-title", "contact-form"]
+      "block_order": [
+        "section-title",
+        "contact-form"
+      ],
+      "settings": {
+        "padding_top": 10,
+        "padding_botton": 10
+      }
     }
   },
-  "order": ["templage", "contact-form"]
+  "order": [
+    "templage",
+    "contact-form"
+  ]
 }
