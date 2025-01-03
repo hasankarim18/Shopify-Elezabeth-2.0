@@ -11,8 +11,18 @@
   "sections": {
     "template": {
       "type": "template-page",
+      "settings": {
+        "show_page_title": true,
+        "show_page_content": true
+      }
+    },
+    "contact_form_2_3KiEga": {
+      "type": "contact-form-2",
       "settings": {}
     }
   },
-  "order": ["template"]
+  "order": [
+    "template",
+    "contact_form_2_3KiEga"
+  ]
 }
