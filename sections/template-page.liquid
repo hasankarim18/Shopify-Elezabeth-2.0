@@ -1,0 +1,45 @@
+<div class="template-page">
+  <div class="container">
+    {% if section.settings.show_page_title %}
+      <h3 class="text-3xl text-center">{{ page.title }}</h3>
+    {% endif %}
+
+    {% if section.settings.show_page_content %}
+      <div class="mt-8 page-content text-center">
+        {{ page.content }}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+
+<style>
+  .page-content img {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Tempage Page",
+    "tag": "section",
+    "class": "tempate_page",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_page_title",
+        "label": "Show Page Title",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_page_content",
+        "label": "Show page content",
+        "default": true
+      }
+    ]
+
+  }
+{% endschema %}

@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "templage": {
+      "type": "template-page",
+      "settings": {}
+    },
+    "contact-form": {
+      "type": "contact-form-1",
+      "blocks": {
+        "section-title": {
+          "type": "section-title"
+        },
+        "contact-form": {
+          "type": "contact-form"
+        }
+      },
+      "block_order": ["section-title", "contact-form"]
+    }
+  },
+  "order": ["templage", "contact-form"]
+}

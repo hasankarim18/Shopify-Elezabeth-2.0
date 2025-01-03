@@ -10,7 +10,7 @@
 {
   "sections": {
     "template": {
-      "type": "templage-page",
+      "type": "template-page",
       "settings": {}
     }
   },
