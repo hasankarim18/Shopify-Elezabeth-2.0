@@ -20,8 +20,13 @@
     },
     "featured-product": {
       "type": "featured-product-1",
-      "settings": {}
+      "settings": {
+        "selected_product": "blue-silk-tuxedo"
+      }
     }
   },
-  "order": ["featured-collection", "featured-product"]
+  "order": [
+    "featured-collection",
+    "featured-product"
+  ]
 }
