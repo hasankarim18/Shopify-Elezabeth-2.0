@@ -13,13 +13,18 @@
     <div>
       <ul class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {% for product in selected_collection.products limit: section.settings.product_limit %}
-          {% render 'product-card'
-            , product: product
-            , section %}
+          <li class="flex justify-center items-center">
+            {% render 'product-card'
+              , product: product
+              , section %}
+          </li>
         {% else %}
           {% for item in (1..4) %}
-            {% render 'product-card-placeholder' %}
+            <li class="flex justify-center items-center">
+              {% render 'product-card-placeholder' %}
+            </li>
           {% endfor %}
+
         {% endfor %}
       </ul>
     </div>

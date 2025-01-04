@@ -1,0 +1,59 @@
+<div style="
+  padding-top:{{ section.settings.padding_top }}px;
+  padding-bottom:{{ section.settings.padding_bottom }}px;
+  margin-top:{{ section.settings.margin_top }}px;
+  margin-bottom:{{ section.settings.margin_bottom }}px;
+" class="footer-group bg-[#EFEFEF]">
+  <div class="container">
+    <div class="newsletter">
+      {% render 'footer-newsletter' %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Footer",
+    "tag": "section",
+    "class": "footer",
+    "settings": [
+      {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Padding top",
+        "default": 30,
+        "min": 10,
+        "max": 100,
+        "step": 5
+      },
+      {
+        "type": "range",
+        "id": "padding_botton",
+        "label": "Padding top",
+        "default": 30,
+        "min": 10,
+        "max": 100,
+        "step": 5
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "label": "Padding top",
+        "default": 30,
+        "min": 10,
+        "max": 100,
+        "step": 5
+      },
+      {
+        "type": "range",
+        "id": "margin_botton",
+        "label": "Padding top",
+        "default": 30,
+        "min": 10,
+        "max": 100,
+        "step": 5
+      }
+    ]
+  }
+{% endschema %}

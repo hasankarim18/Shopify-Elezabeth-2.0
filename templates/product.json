@@ -1,0 +1,10 @@
+{
+  "name": "Product page",
+  "sections": {
+    "template": {
+      "type": "template-product",
+      "settings": {}
+    }
+  },
+  "order": ["template"]
+}

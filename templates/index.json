@@ -17,9 +17,11 @@
         "show_addtocart": false,
         "product_limit": 4
       }
+    },
+    "featured-product": {
+      "type": "featured-product-1",
+      "settings": {}
     }
   },
-  "order": [
-    "featured-collection"
-  ]
+  "order": ["featured-collection", "featured-product"]
 }

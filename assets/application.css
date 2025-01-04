@@ -615,7 +615,21 @@ button {
   margin-right: auto;
   margin-top: 0px;
   margin-bottom: 0px;
+  width: 100%;
   max-width: 80rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+.visible {
+  visibility: visible;
 }
 
 .absolute {
@@ -1230,6 +1244,11 @@ button {
   background-color: rgb(26 34 56 / var(--tw-bg-opacity, 1));
 }
 
+.bg-\[\#EFEFEF\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 239 239 / var(--tw-bg-opacity, 1));
+}
+
 .bg-\[\#FF6A3D\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 106 61 / var(--tw-bg-opacity, 1));
@@ -1507,6 +1526,10 @@ button {
 
 .font-medium {
   font-weight: 500;
+}
+
+.font-normal {
+  font-weight: 400;
 }
 
 .font-semibold {

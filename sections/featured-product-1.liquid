@@ -1,0 +1,31 @@
+<div class="featrued-product">
+
+
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>image</div>
+      <div>
+        infor</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Product 1",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "product",
+        "id": "selected_product",
+        "label": "Select Your Product"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Product 1",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
