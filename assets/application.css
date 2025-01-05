@@ -895,6 +895,14 @@ button {
   height: 100vh;
 }
 
+.h-94 {
+  height: 22rem;
+}
+
+.max-h-80 {
+  max-height: 20rem;
+}
+
 .min-h-\[150px\] {
   min-height: 150px;
 }

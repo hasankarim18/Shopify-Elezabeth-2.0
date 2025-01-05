@@ -15,6 +15,6 @@
     <div class="product-single_media border-2 shadow-sm p-2 rounded overflow-hidden ">
       {{ media | model_viewer_tag }}
     </div>
-{% else %}
-
-  {% endcase %}
+  {% else %}
+    {{ media | media_tag }}
+{% endcase %}

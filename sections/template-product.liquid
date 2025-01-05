@@ -14,13 +14,17 @@
           {% endfor %}
 
         </div>
+        {% comment %} mobile product slider {% endcomment %}
         <div class="block md:hidden">
-          <ul>
-            {% for media in product.media %}
-              {% render 'product-media-mobile'
-                , media: media %}
-            {% endfor %}
-          </ul>
+          <div class="swiper mySwiper">
+            <ul class="swiper-wrapper h-94">
+              {% for media in product.media %}
+                {% render 'product-media-mobile'
+                  , media: media %}
+              {% endfor %}
+            </ul>
+            <div class="swiper-scrollbar"></div>
+          </div>
         </div>
 
       </div>
@@ -32,3 +36,14 @@
     </div>
   </div>
 </div>
+
+<script src="{{ "swiper-bundle.min.js" |  asset_url }}"></script>
+
+<script>
+   var swiper = new Swiper(".mySwiper", {
+      scrollbar: {
+        el: ".swiper-scrollbar",
+        hide: false,
+      },
+    });
+</script>
