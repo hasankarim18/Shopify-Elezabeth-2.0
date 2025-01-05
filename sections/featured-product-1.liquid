@@ -1,11 +1,23 @@
 <div class="featrued-product">
 
+  {% assign product = all_products[section.settings.selected_product] %}
 
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>image</div>
       <div>
-        infor</div>
+        <img
+          src="{{ product.featured_image |  image_url }}"
+          width=""
+          height=""
+          class="w-full h-80"
+          alt="">
+      </div>
+      <div>
+        <h3 class="text-3xl">{{ product.title }}</h3>
+        <div>
+          <a href="{{ product.url }}">View detail</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

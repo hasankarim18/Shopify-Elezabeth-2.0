@@ -1,0 +1,19 @@
+{% case media.media_type %}
+  {% when 'image' %}
+
+    <li class="product-single_media border-2 shadow-sm p-2 rounded overflow-hidden ">
+      {{ media | image_url: width: "300", height: "300" | image_tag: class: "h-80 w-full  hover:scale-125 transition-all duration-[3000ms]  overflow-hidden ease-in-out", width: nil, height: nil }}
+    </li>
+  {% when 'video' %}
+    <li class="product-single_media  shadow-sm p-2 rounded overflow-hidden ">
+      {{ media | video_tag: controls: true, image_size: '400px', style: 'min-width:300px' }}
+    </li>
+  {% when 'external_video' %}
+    <li class="product-single_media  shadow-sm p-2 rounded overflow-hidden ">
+      {{ media | external_video_tag }}
+    </li>
+  {% when 'model' %}
+    <li class="product-single_media border-2 shadow-sm p-2 rounded overflow-hidden ">Models</li>
+    {% else %}
+
+{% endcase %}

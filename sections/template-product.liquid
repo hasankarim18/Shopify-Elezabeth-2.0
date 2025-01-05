@@ -1,10 +1,31 @@
 <div class="template-product">
   <div class="container">
-    <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 overflow-hidden">
       {% comment %} product images {% endcomment %}
-      <div class="product_image">iamge</div>
+      <div class="product_medias sticky">
+        <div class="featured_image mb-4">
+          {{ product.featured_image | image_url: width: "600", height: "600" | image_tag: class: "w-full h-full" }}
+
+        </div>
+        <div class="hidden md:grid md:grid-cols-2 md:gap-2">
+          {% for media in product.media %}
+            {% render "product-media"
+              , media: media %}
+          {% endfor %}
+
+        </div>
+        <div class="block md:hidden">
+          <ul>
+            {% for media in product.media %}
+              {% render 'product-media-mobile'
+                , media: media %}
+            {% endfor %}
+          </ul>
+        </div>
+
+      </div>
       {% comment %} product info {% endcomment %}
-      <div class="product_info">
+      <div class="product_infomation">
         <h2 class="text-3xl font-semibold ">
           {{ product.title }}</h2>
       </div>
