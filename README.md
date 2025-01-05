@@ -35,6 +35,24 @@ module.exports = {
 
 # Remove a cart line item manually
 
+# use js script like this
+
+```
+<script defer src="{{ "swiper-bundle.min.js" |  asset_url }}"></script>
+
+// this will solve this problem
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    var swiper = new Swiper(".mySwiper", {
+      scrollbar: {
+        el: ".swiper-scrollbar",
+        hide: false,
+      },
+    });
+  });
+</script>
+```
+
 ```
  <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"">
       Remove Manual

@@ -1,8 +1,14 @@
+<style>
+  .product_infomation {
+    height: fit-content;
+  }
+</style>
+
 <div class="template-product">
   <div class="container">
-    <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 overflow-hidden">
+    <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
       {% comment %} product images {% endcomment %}
-      <div class="product_medias sticky">
+      <div class="product_medias">
         <div class="featured_image mb-4">
           {{ product.featured_image | image_url: width: "600", height: "600" | image_tag: class: "w-full h-full" }}
 
@@ -29,21 +35,42 @@
 
       </div>
       {% comment %} product info {% endcomment %}
-      <div class="product_infomation">
-        <h2 class="text-3xl font-semibold ">
-          {{ product.title }}</h2>
+      <div class="product_infomation sticky top-4">
+        <div class="">
+          {% render 'product-info-form1'
+            , section: section
+            , product: product %}
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<script src="{{ "swiper-bundle.min.js" |  asset_url }}"></script>
+<script defer src="{{ "swiper-bundle.min.js" |  asset_url }}"></script>
 
 <script>
-   var swiper = new Swiper(".mySwiper", {
+    document.addEventListener("DOMContentLoaded", function () {
+    var swiper = new Swiper(".mySwiper", {
       scrollbar: {
         el: ".swiper-scrollbar",
         hide: false,
       },
     });
+  });
 </script>
+
+{% schema %}
+  {
+    "name": "Product template-1",
+    "tag": "section",
+
+    "settings": [],
+    "blocks": [],
+    "presets": [
+      {
+        "name": "Product template-1",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}

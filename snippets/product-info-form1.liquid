@@ -1,0 +1,86 @@
+{% assign selected_prduct = product.selected_or_first_available_variant %}
+
+<div>
+  {% form 'product'
+    , product %}
+    {% comment %} product id // name must be id {% endcomment %}
+    <input
+      type="hidden"
+      name="id"
+      value="{{ selected_prduct.id }}">
+    <p class="text-sm text-gray-500 my-3 uppercase font-semibold">{{ product.vendor }}</p>
+    <h2 class="my-3 text-2xl font-semibold capitalize text-gray-900">{{ product.title }}</h2>
+    {% comment %} price {% endcomment %}
+    <div class="my-3">
+
+      <span class="text-base text-gray-500 line-through ">{{ selected_prduct.compare_at_price | money }}</span>
+      <span class="text-base text-gray-500">{{ selected_prduct.price | money }}</span>
+      {% if selected_prduct.compare_at_price > selected_prduct.price %}
+        <span class="px-5 py-1 text-sm font-bold bg-red-500 rounded-full text-white mx-4">Sale</span>
+      {% endif %}
+    </div>
+    {% comment %}  {% endcomment %}
+    <div class="my-3">
+      {% comment %} যদি  ভ্যারিয়েন্ট  থাকে তাহলে for loop করতে হবে সকল ভ্যারিয়েন্ট দেখানোর জন্য {% endcomment %}
+      {% unless product.has_only_default_variant %}
+        <div data-url="{{ product.url }}" data-section="{{ section.id }}">
+          {% for option in product.options_with_values %}
+            <label class="capitalize" for="Option-{{ section.id }}{{ forloop.index0 }}">{{ option.name }}</label>
+            <div class="my-2">
+              <select
+                class="w-full border-2  py-3 px-3"
+                name="options[{{ option.name |  escape }}]"
+                id="Option-{{ section.id }}{{ forloop.index0 }}">
+                {% for value in option.values %}
+                  <option
+                    {% if option.selected_value == value %}
+                    selected="selected"
+                    {% endif %}
+                    value="{{ value |  escape }}">{{ value }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endfor %}
+        </div>
+      {% endunless %}
+    </div>
+    {% comment %} product quantity {% endcomment %}
+    <div>
+      <label for="Quantity-{{ section.id }}">Quantity</label>
+      <div>
+        <div class="my-2">
+          <input
+            class="w-full border px-3 py-3"
+            type="number"
+            name="quantity"
+            id="Quantity-{{ section.id }}"
+            value="1"
+            min="1">
+        </div>
+      </div>
+      {% comment %} product description {% endcomment %}
+      <div class="my-3">
+        <p class="text-gray-700">
+          {{ product.description }}
+        </p>
+      </div>
+      {% comment %}  {% endcomment %}
+      <div class="y-3">
+        <button
+          {% if selected_prduct.available == false %}
+          disabled="disabled"
+          {% endif %}
+          type="submit"
+          name="add"
+          class="w-full inline-block px-6 py-4 bg-gray-900 text-white hover:bg-gray-700 capitalize rounded-md my-2">
+          {% if selected_prduct.available == false %}
+            sold out
+          {%- else -%}
+            add to cart
+          {% endif %}
+        </button>
+      </div>
+    </div>
+  {% endform %}
+
+</div>
