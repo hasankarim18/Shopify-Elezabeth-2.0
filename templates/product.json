@@ -11,10 +11,28 @@
   "sections": {
     "template": {
       "type": "template-product",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "vendor": {
+          "type": "vendor"
+        },
+        "title": { "type": "title" },
+        "price": { "type": "price" },
+        "variant_selector": { "type": "variant_selector" },
+        "quntity": { "type": "quntity" },
+        "description": { "type": "description" },
+        "checkout_button": { "type": "checkout_button" }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_selector",
+        "quntity",
+        "checkout_button",
+        "description"
+      ]
     }
   },
-  "order": [
-    "template"
-  ]
+  "order": ["template"]
 }

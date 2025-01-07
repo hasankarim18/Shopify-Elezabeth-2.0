@@ -6,6 +6,10 @@
   .container {
     @apply max-w-7xl w-full px-4 md:px-5 mx-auto my-0;
   }
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply text-red-400 hover:text-red-700;
+  }
 }
 
 @layer base {

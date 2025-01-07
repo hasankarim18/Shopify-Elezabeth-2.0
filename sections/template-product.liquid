@@ -2,11 +2,14 @@
   .product_infomation {
     height: fit-content;
   }
+
+
 </style>
 
 <div class="template-product">
-  template-products
+
   <div class="container">
+
     <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
       {% comment %} product images {% endcomment %}
       <div class="product_medias">
@@ -14,6 +17,7 @@
           {{ product.featured_image | image_url: width: "600", height: "600" | image_tag: class: "w-full h-full" }}
 
         </div>
+        {% comment %} deskto product view {% endcomment %}
         <div class="hidden md:grid md:grid-cols-2 md:gap-2">
           {% for media in product.media %}
             {% render "product-media"
@@ -30,6 +34,9 @@
                   , media: media %}
               {% endfor %}
             </ul>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
             <div class="swiper-scrollbar"></div>
           </div>
         </div>
@@ -56,6 +63,10 @@
         el: ".swiper-scrollbar",
         hide: false,
       },
+      navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+  },
     });
   });
 </script>
@@ -66,7 +77,43 @@
     "tag": "section",
 
     "settings": [],
-    "blocks": [],
+    "blocks": [
+      {
+        "type": "vendor",
+        "name": "Vendor",
+        "limit": 2
+      },
+      {
+        "type": "title",
+        "name": "Title",
+        "limit": 1
+      },
+      {
+        "type": "price",
+        "name": "Price",
+        "limit": 1
+      },
+      {
+        "type": "variant_selector",
+        "name": "Variant Selector",
+        "limit": 1
+      },
+      {
+        "type": "quntity",
+        "name": "Quantity",
+        "limit": 1
+      },
+      {
+        "type": "description",
+        "name": "Description",
+        "limit": 1
+      },
+      {
+        "type": "checkout_button",
+        "name": "Checkout Button",
+        "limit": 1
+      }
+    ],
     "presets": [
       {
         "name": "Product template-1",

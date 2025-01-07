@@ -9,6 +9,9 @@
  */
 {
   "sections": {
+    "hero-banner": {
+      "type": "hero-banner"
+    },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
@@ -25,5 +28,5 @@
       }
     }
   },
-  "order": ["featured-product", "featured-collection"]
+  "order": ["hero-banner", "featured-product", "featured-collection"]
 }

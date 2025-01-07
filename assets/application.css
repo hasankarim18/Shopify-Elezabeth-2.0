@@ -628,6 +628,18 @@ button {
   }
 }
 
+.swiper-button-prev,
+  .swiper-button-next {
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity, 1));
+}
+
+.swiper-button-prev:hover,
+  .swiper-button-next:hover {
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity, 1));
+}
+
 .absolute {
   position: absolute;
 }
