@@ -1,0 +1,10 @@
+{
+  "name": "Secondary style",
+  "sections": {
+    "template": {
+      "type": "template-product2",
+      "settings": {}
+    }
+  },
+  "order": ["template"]
+}

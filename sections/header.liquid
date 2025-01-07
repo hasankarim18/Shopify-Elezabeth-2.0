@@ -12,7 +12,9 @@
       <!-- STORE NAME / STORE LOGO -->
       <div class="flex justify-start lg:flex-1 truncate">
         <h1 class="text-xl font-bold truncate">
-          {{ shop.name }}</h1>
+          <a class="text-gray-700 hover:text-gray-900 cursor-pointer" href="{{ routes.root_url }}">
+            {{ shop.name }}</a>
+        </h1>
       </div>
 
       <div x-on:click="mobileMenuOpen = !mobileMenuOpen" class="-mr-2 -my-2 ml-3 md:hidden">

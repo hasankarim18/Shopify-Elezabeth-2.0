@@ -1,0 +1,39 @@
+<div class="breadcrumb">
+  {{ template.name }}
+  <div class="container">
+    {%- case template.name -%}
+      {%- when 'product' -%}
+        {% if template.name == 'product' %}
+          <a href="{{ routes.root_url }}">Home</a>
+          {% unless collection.title %}
+            /
+            <a href="{{ routes.all_products_collection_url}}">
+              all-products
+            </a>
+          {% endunless %}
+          {% comment %} <a href="{{ collection.url }}">{{ collection.title }}</a> {% endcomment %}
+          {% if template.name == 'product' %}
+            /
+            <span class="text-gray-500">{{ product.title }}</span>
+          {% endif %}
+        {% endif %}
+      {%- else -%}
+        <div class="text-red-400">not working in other tempalae</div>
+    {%- endcase -%}
+
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Breadcrumbs",
+    "tag": "section",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Breadcrumbs",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}

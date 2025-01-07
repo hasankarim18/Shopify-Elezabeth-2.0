@@ -9,13 +9,13 @@
 <div class="template-product">
 
   <div class="container">
-
-    <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
-      {% comment %} product images {% endcomment %}
+    {% comment %} template name {% endcomment %}
+    {{ template.name }}
+      <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
+      {% comment %} #product images {% endcomment %}
       <div class="product_medias">
         <div class="featured_image mb-4">
           {{ product.featured_image | image_url: width: "600", height: "600" | image_tag: class: "w-full h-full" }}
-
         </div>
         {% comment %} deskto product view {% endcomment %}
         <div class="hidden md:grid md:grid-cols-2 md:gap-2">
