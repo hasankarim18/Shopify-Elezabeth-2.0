@@ -19,15 +19,6 @@
         "selected_product": "blue-silk-tuxedo"
       }
     },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "selected_collection": "all",
-        "section_title": "Featured Collection",
-        "show_addtocart": false,
-        "product_limit": 4
-      }
-    },
     "contact_form_2_fLTHFh": {
       "type": "contact-form-2",
       "settings": {}
@@ -36,7 +27,6 @@
   "order": [
     "hero-banner",
     "featured-product",
-    "featured-collection",
     "contact_form_2_fLTHFh"
   ]
 }
