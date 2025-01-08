@@ -10,7 +10,14 @@
 {
   "sections": {
     "hero-banner": {
-      "type": "hero-banner"
+      "type": "hero-banner",
+      "settings": {}
+    },
+    "featured-product": {
+      "type": "featured-product-1",
+      "settings": {
+        "selected_product": "blue-silk-tuxedo"
+      }
     },
     "featured-collection": {
       "type": "featured-collection",
@@ -21,12 +28,15 @@
         "product_limit": 4
       }
     },
-    "featured-product": {
-      "type": "featured-product-1",
-      "settings": {
-        "selected_product": "blue-silk-tuxedo"
-      }
+    "contact_form_2_fLTHFh": {
+      "type": "contact-form-2",
+      "settings": {}
     }
   },
-  "order": ["hero-banner", "featured-product", "featured-collection"]
+  "order": [
+    "hero-banner",
+    "featured-product",
+    "featured-collection",
+    "contact_form_2_fLTHFh"
+  ]
 }
