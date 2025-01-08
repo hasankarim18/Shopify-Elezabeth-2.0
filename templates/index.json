@@ -19,6 +19,12 @@
         "selected_product": "blue-silk-tuxedo"
       }
     },
+    "featured_product_1_DLECBK": {
+      "type": "featured-product-1",
+      "settings": {
+        "selected_product": "black-leather-bag"
+      }
+    },
     "featured_collection_H9FcKT": {
       "type": "featured-collection",
       "settings": {
@@ -36,6 +42,7 @@
   "order": [
     "hero-banner",
     "featured-product",
+    "featured_product_1_DLECBK",
     "featured_collection_H9FcKT",
     "contact_form_2_fLTHFh"
   ]
