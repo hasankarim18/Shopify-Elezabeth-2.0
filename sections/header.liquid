@@ -5,7 +5,7 @@
 {%- endif -%}
 
 
-<div class="relative bg-white" x-data="{ mobileMenuOpen: false }">
+<div class="relative bg-white" x-data="{ mobileMenuOpen: false,  searchBarOpen:false}">
   <div class="mx-auto px-4 sm:px-6">
 
     <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
@@ -73,6 +73,13 @@
         {% endfor %}
       </nav>
       <div class="hidden md:flex items-center justify-end md:flex-1 space-x-5">
+        <div>
+          {% comment %} #search_button {% endcomment %}
+          <button x-on:click="searchBarOpen  = ! searchBarOpen" class="">
+            {% render 'icon-search'
+              , class: 'w-8 h-8 whitespace-nowrap text-base text-gray-500 hover:text-gray-900 ' %}
+          </button>
+        </div>
         <div class="relative">
           <a href="{{ routes.cart_url }}" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
             {% render 'icon-shopping-bag'
@@ -146,8 +153,13 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
+  {% comment %} #search_ {% endcomment %}
+  {% render 'search-modal'
+    , alpine_data: {searchBarOpen: true }
+    , x-cloak: x-cloak %}
+</div>
+
 
 {% schema %}
   {

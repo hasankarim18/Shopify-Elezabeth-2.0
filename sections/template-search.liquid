@@ -1,0 +1,57 @@
+<div class="container">
+  your search result
+  <div class="p-2 borde-2 my-3">
+    <form
+      class="p-4 md:p-8 border-2 rounded-md"
+      action="{{ routes.search_url }}"
+      method="get">
+      <input
+        style="cursor:text;"
+        type="search"
+        placeholder="Search"
+        name="q"
+        value="{{ search.terms |  escape }}"
+        class="w-full p-4 border-2 border-black focus:border-yellow-500 transition-all duration-150 outline-none focus:outline-none cursor-text rounded-md ">
+      <div class="w-full my-2">
+        <button type="submit" class="bg-gray-900 hover:bg-gray-700 w-full block text-white py-4 rounded-md">Search</button>
+      </div>
+    </form>
+  </div>
+  {% paginate search.results by 12 %}
+    {% if search.performed %}
+      {% if search.results.size > 0 %}
+        <ul class="grid grid-cols-1 md:grid-cols-4">
+
+          {% for item in search.results %}
+            {% case item.object_type %}
+              {% when 'article' %}
+                <div>article</div>
+              {% when 'page' %}
+                <div>page</div>
+              {% when 'product' %}
+                <li>
+                  {% render 'product-card'
+                    , product: item %}
+                </li>
+              {% else %}
+                {{ item.title }}
+            {% endcase %}
+          {% endfor %}
+
+        </ul>
+        <div class="my-3">
+          {% render "pagination"
+            , paginate: paginate %}
+        </div>
+      {% else %}
+        <div>
+          <h2 class="text-3xl text-center">No Match Found for::
+            <span class="font-semibold text-teal-400">
+              {{ search.terms | escape }}
+            </span>!!! Try a different keyword
+          </h2>
+        </div>
+      {% endif %}
+    {% endif %}
+  {% endpaginate %}
+</div>

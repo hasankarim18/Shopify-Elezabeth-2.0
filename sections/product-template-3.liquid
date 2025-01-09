@@ -9,7 +9,7 @@
   <div class="container">
     {% comment %} template name {% endcomment %}
     {{ template.name }}
-    <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
+      <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
       {% comment %} #product images {% endcomment %}
       <div class="product_medias">
         <div class="featured_image mb-4">
@@ -19,13 +19,13 @@
             width=""
             height=""
             class="w-full h-80"
-            alt=""
-          >
+            alt="">
         </div>
         {% comment %} deskto product view {% endcomment %}
         <div class="hidden md:grid md:grid-cols-2 md:gap-2">
           {% for media in product.media %}
-            {% render 'product-media', media: media %}
+            {% render 'product-media'
+              , media: media %}
           {% endfor %}
         </div>
         {% comment %} mobile product slider {% endcomment %}
@@ -33,7 +33,8 @@
           <div class="swiper mySwiper">
             <ul class="swiper-wrapper h-94">
               {% for media in product.media %}
-                {% render 'product-media-mobile', media: media %}
+                {% render 'product-media-mobile'
+                  , media: media %}
               {% endfor %}
             </ul>
 
@@ -46,7 +47,10 @@
       {% comment %} product info {% endcomment %}
       <div class="product_infomation sticky top-4">
         <div class="">
-          {% render 'product-info-form3', section: section, product: product, selected_prduct: selected_prduct %}
+          {% render 'product-info-form3'
+            , section: section
+            , product: product
+            , selected_prduct: selected_prduct %}
         </div>
       </div>
     </div>
@@ -71,55 +75,55 @@
 </script>
 
 {% schema %}
-{
-  "name": "Product template-1",
-  "tag": "section",
+  {
+    "name": "Product template-1",
+    "tag": "section",
 
-  "settings": [],
-  "blocks": [
-    {
-      "type": "vendor",
-      "name": "Vendor",
-      "limit": 2
-    },
-    {
-      "type": "title",
-      "name": "Title",
-      "limit": 1
-    },
-    {
-      "type": "price",
-      "name": "Price",
-      "limit": 1
-    },
-    {
-      "type": "variant_selector",
-      "name": "Variant Selector",
-      "limit": 1
-    },
-    {
-      "type": "quntity",
-      "name": "Quantity",
-      "limit": 1
-    },
-    {
-      "type": "description",
-      "name": "Description",
-      "limit": 1
-    },
-    {
-      "type": "checkout_button",
-      "name": "Checkout Button",
-      "limit": 1
-    }
-  ],
-  "presets": [
-    {
-      "name": "Product template-1",
-      "settings": {}
-    }
-  ]
-}
+    "settings": [],
+    "blocks": [
+      {
+        "type": "vendor",
+        "name": "Vendor",
+        "limit": 2
+      },
+      {
+        "type": "title",
+        "name": "Title",
+        "limit": 1
+      },
+      {
+        "type": "price",
+        "name": "Price",
+        "limit": 1
+      },
+      {
+        "type": "variant_selector",
+        "name": "Variant Selector",
+        "limit": 1
+      },
+      {
+        "type": "quntity",
+        "name": "Quantity",
+        "limit": 1
+      },
+      {
+        "type": "description",
+        "name": "Description",
+        "limit": 1
+      },
+      {
+        "type": "checkout_button",
+        "name": "Checkout Button",
+        "limit": 1
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product template-1",
+        "settings": {}
+      }
+    ]
+  }
 {% endschema %}
 
 <script>
@@ -143,7 +147,7 @@
       if(this.currentVariant){
         this.updateUrl()
         this.updateFormId()
-        this.updatePrice()      
+        this.updateUi()      
       }
     }
   
@@ -174,7 +178,7 @@
       form_input.value = this.currentVariant.id
     }
   
-    updatePrice() {
+    updateUi() {
   fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
     .then((response) => {    
       if (response.status == 200) {
