@@ -1,20 +1,204 @@
+<script>
+  window.Shopify = window.Shopify || {}
+  window.Shopify.routes = {{ routes |  json }}
+</script>
+
+{% assign selected_product = product.selected_or_first_available_variant %}
+
 <div class="product-template-2">
-
+  <div class="text-center border-b py-2 bg-rose-300">{{ product.title }} // template.-product2 // delete after development</div>
   <div class="container">
+    <div class="prodcut-wrapper grid  grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-4">
+      <div class="product-media ">
+        {% render 'product-image-slider'
+          , product: product
+          , section: section %}
+      </div>
+      <div class="product-infos ">
+        {% form 'product'
+          , product
+          , class: 'product_mainform' %}
+          <input
+            type="hidden"
+            class="hidden"
+            name="id"
+            value="{{ selected_product.id }}">
+            <div>
+              <input
+                class="px-4 border  text-gray-700 text-xl font-semibold my-3 rounded-md py-3 text-center"
+                type="text"
+                name="quantity"
+                min="1"
+                value="1">                
+            </div>
+          <input
+            type="hidden"
+            name="add"
+            value="Add To Cart">
 
-    <h2 class="text-3xl text-center border-b-2 py-2">
-      templateName: {{ template.name }}--{{ product.title }}</h2>
-    {% comment %} #product-template 2  {% endcomment %}
-    <div class=""></div>
+          <div class="info-blocks">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'app' %}
+                  {% render block %}
+                {% when 'title' %}
+                  <h2 class="text-3xl mb-0 capitalize">
+                    {{ selected_product.title }}
+                  </h2>
+                  <div class="text-sm uppercase">
+                    {{ product.vendor }}
+                  </div>
+                {% when 'price' %}
+                  <div>
+                    <p class="text-xl text-gray-700">Price {{ product.price | money }}</p>
+                  </div>
+                {% when 'variant-selection' %}
+                  <div class="variant-selection my-3 p-3 md:p-5">
+                    <div class="bg-rose-200 p-2 rounded-md">{{ selected_product.title }} / {{ selected_product.inventory_quantity }} </div>
+                    {% comment %} product has variants  {% endcomment %}
+                    {%- unless product.has_only_default_variant -%}
+                      {% for option in product.options_with_values %}
+                        <div class="options my-4">
 
+                            <label class="text-2xl mb-2 ms-2 capitalize" for="option-{{ forloop.index0 }}">{{ option.name }}</label>
+                            <select class="border capitalize text-xl p-2 block w-full" name="" id="option-{{ forloop.index0 }}">
+                              {% for value in option.values  %}
+                                <option 
+                                 class="variant_option"
+                                 {% if value.available == false %}
+                                  disabled="disabled"
+                                 {% endif %}
+                                 {% if value.selected == value %}
+                                  selected
+                                 {% endif %}
+                                 value="{{ value }}">
+                                 {{ value }}
+                                 </option>
+                              {% endfor %}
+                            </select>
+                        </div>
+                      {% endfor %}
+                    {%- endunless -%}
+                  </div>
+                {% when 'quantity-selection' %}
+                  <div class="quantity-selection"> 
+                    <label for="quantity">Quantity</label>
+                    <div class="plus-minus flex gap-2 text-center items-center justify-center ">
+                      <div class="border p-2">
+                      <button class="quantity_button minus " disabled>-</button>
+                      <input type="number" class="product-quantity text-3xl text-center" name="quantity" value="1" min="1" max="{{ product.selected_or_first_available_variant.inventory_quantity }}">
+                      <button class="quantity_button plus" disabled>+</button>
+                    </div>
+                    </div>
+                  </div>
+                {% when 'buy-button' %}
+                  <div class="my-3">
+                     <button type="submit" {% if product.selected_or_first_available_variant.inventory_quantity>  0 or 
+                      product.selected_or_first_available_variant.inventory_policy == 'continue' %}
+                      disabled
+                     {% endif %} class="add-to-cart">
+                     {% if product.selected_or_first_available_variant.inventory_quantity>  0 or 
+                      product.selected_or_first_available_variant.inventory_policy == 'continue' %}
+                        Add to cart
+                        {% else %}
+                         <span class="w-full cursor-not-allowed block text-red-600 "> sold out</span> 
+                     {% endif %}
+                     </button>
+                  </div>
+                {% when 'description' %}
+                  <p class="my-3 text-gray-700">
+                    {{ product.description }}
+                  </p>
+                {% when 'collapsible_tab' %}
+                 
+                  <div class="my-collapse my-6 shadow-lg p-4">                    
+                    <h4 class="text-xl font-semibold cursor-pointer" >{{ block.settings.title }} <span class="trigger">&#43;</span> </h4>
+                    {% assign collapsibleTitle = block.settings.title |  downcase %}
+                    <div class="content"> 
+                    {% if block.settings.content != blank %}
+                      {{ block.settings.content }}
+                      {% elsif collapsibleTitle contains 'specification' %}
+                        {{ product.metafields.additions.specification }}
+                        {% elsif collapsibleTitle contains 'care' %}
+                          {{ product.metafields.additions.care }}
+                    {% endif %}
+                    </div>
+                  </div>
+                {% else %}
+                  <div></div>
+              {% endcase %}
+            {% endfor %}
+          </div>
+
+          
+        {% endform %}
+
+      </div>
+    </div>
   </div>
 </div>
+
 
 {% schema %}
   {
     "name": "Product template 2",
     "tag": "section",
     "settings": [],
+    "blocks": [
+      {
+      "type": "@app"
+      },
+      {
+        "type": "title",
+        "name":"Title",
+        "limit": 1
+      },
+      {
+        "type": "price",
+        "name":"Price",
+        "limit": 1
+      },
+      {
+        "type": "variant-selection",
+        "name":"Variant Selection",
+        "limit": 1
+      },
+      {
+        "type": "quantity-selection",
+        "name":"Quantity Selection",
+        "limit": 1
+      },
+      {
+        "type": "buy-button",
+        "name":"Buy Button",
+        "limit": 1
+      },
+      {
+        "type": "description",
+        "name":"Description",
+        "limit": 1
+      },
+      {
+        "type": "collapsible_tab",
+        "name":"Collapsible tab",
+        "limit": 8,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "default":"Title Here",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+
+      
+    ],
     "presets": [
       {
         "name": "Product template 2",
@@ -23,3 +207,11 @@
     ]
   }
 {% endschema %}
+
+{% assign product_variant_json = product.variants | json %}
+
+<script>
+
+  // store the product variants as global variable 
+  window.productVariants = {{ product_variant_json }}
+</script>

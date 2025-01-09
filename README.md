@@ -1,8 +1,24 @@
 ### Elezabeth clene theme by Hasan
 
+# Plugin uses
+
+- [swiper.js -- used in template-product.liquid]()
+- [Flickity -- used in template-product2.liquid](https://flickity.metafizzy.co/)
+- [lightbox - by Lokesh Dhakar](https://lokeshdhakar.com/projects/lightbox2/#getting-started)
+- [sweet alert](https://sweetalert2.github.io/)
+
 #### [Gti Repo Link](https://github.com/hasankarim18/Shopify-Elezabeth-2.0)
 
 #### [Live Link](https://elezabeth-dev-store.myshopify.com/) // password: 4
+
+# how should you write script in shopify
+
+```
+document.addEventListener("DOMContentLoaded", function () {
+    // Your code here
+    console.log("Document loaded");
+});
+```
 
 - tailwind configaration was changed
 

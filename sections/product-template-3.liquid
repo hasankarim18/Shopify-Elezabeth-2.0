@@ -1,0 +1,272 @@
+<style>
+  .product_infomation {
+    height: fit-content;
+  }
+
+
+</style>
+{% assign selected_prduct = product.selected_or_first_available_variant %}
+
+<div class="template-product">
+
+  <div class="container">
+    {% comment %} template name {% endcomment %}
+    {{ template.name }}
+      <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
+      {% comment %} #product images {% endcomment %}
+      <div class="product_medias">
+        <div class="featured_image mb-4">
+          <img
+            id="product_feature_image"
+            src="{{ selected_prduct.featured_image | image_url }}"
+            width=""
+            height=""
+            class="w-full h-80"
+            alt="">
+
+        </div>
+        {% comment %} deskto product view {% endcomment %}
+        <div class="hidden md:grid md:grid-cols-2 md:gap-2">
+          {% for media in product.media %}
+            {% render "product-media"
+              , media: media %}
+          {% endfor %}
+
+        </div>
+        {% comment %} mobile product slider {% endcomment %}
+        <div class="block md:hidden">
+          <div class="swiper mySwiper">
+            <ul class="swiper-wrapper h-94">
+              {% for media in product.media %}
+                {% render 'product-media-mobile'
+                  , media: media %}
+              {% endfor %}
+            </ul>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-scrollbar"></div>
+          </div>
+        </div>
+
+      </div>
+      {% comment %} product info {% endcomment %}
+      <div class="product_infomation sticky top-4">
+
+        <div class="">
+          {% render 'product-info-form3'
+            , section: section
+            , product: product
+            , selected_prduct: selected_prduct
+          %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script defer src="{{ "swiper-bundle.min.js" |  asset_url }}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    var swiper = new Swiper(".mySwiper", {
+      scrollbar: {
+        el: ".swiper-scrollbar",
+        hide: false,
+      },
+      navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+  },
+    });
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Product template-1",
+    "tag": "section",
+
+    "settings": [],
+    "blocks": [
+      {
+        "type": "vendor",
+        "name": "Vendor",
+        "limit": 2
+      },
+      {
+        "type": "title",
+        "name": "Title",
+        "limit": 1
+      },
+      {
+        "type": "price",
+        "name": "Price",
+        "limit": 1
+      },
+      {
+        "type": "variant_selector",
+        "name": "Variant Selector",
+        "limit": 1
+      },
+      {
+        "type": "quntity",
+        "name": "Quantity",
+        "limit": 1
+      },
+      {
+        "type": "description",
+        "name": "Description",
+        "limit": 1
+      },
+      {
+        "type": "checkout_button",
+        "name": "Checkout Button",
+        "limit": 1
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product template-1",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
+
+
+<script>
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    // showing initial id
+    const initialVariantId = {{ product.selected_or_first_available_variant.id }}  
+    const productId = document.getElementById('product_id')
+    window.productId = productId
+  
+    productId.innerHTML = initialVariantId
+  class VariantSelector extends HTMLElement {
+    constructor(){
+      super();
+      this.addEventListener('change', this.onVariantChange);
+    }
+    onVariantChange(){
+      this.getSelectedOptions()
+      this.getSelectedVariant()
+      this.getVariantIdAndUpdate()
+      if(this.currentVariant){
+        this.updateUrl()
+        this.updateFormId()
+        this.updatePrice()      
+      }
+    }
+  
+    getSelectedOptions(){
+       this.options = Array.from(this.querySelectorAll('select'), (select)=>select.value);
+       console.log(this.options)
+    }
+  
+    getVariantJSON(){
+      this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent)
+      return this.variantData;
+    }
+  
+    getSelectedVariant(){    
+        this.currentVariant = this.getVariantJSON().find((variant) => 
+          variant.options.every((option, index) => this.options[index] === option)
+        );
+       // console.log(this.currentVariant)
+      }
+    
+    updateUrl(){
+      if(!this.currentVariant) return;
+      window.history.replaceState({}, '', `${this.dataset.url}?variant=${this.currentVariant.id}`)
+    }
+  
+    updateFormId(){
+      const form_input = document.querySelector('#product_form').querySelector('input[name="id"]')
+      form_input.value = this.currentVariant.id
+    }
+  
+    updatePrice() {
+  fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
+    .then((response) => {
+      console.log(response)
+      if (response.statusText == 'OK') {
+        return response.text();
+      }else{
+        console.log('failed')
+        alert('internal srever error')
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+     
+    })
+    .then((responseText) => {
+      const id = `price-${this.dataset.section}`;
+      const availableId = `available-${this.dataset.section}`;
+      const html = new DOMParser().parseFromString(responseText, 'text/html');
+  
+      const oldPrice = document.getElementById(id);
+      const newPrice = html.getElementById(id);
+      const oldAvailAble = document.getElementById(availableId);
+      const newAvailable = html.getElementById(availableId);
+  
+      if (oldPrice && newPrice) oldPrice.innerHTML = newPrice.innerHTML;
+  
+      const addToCartButton = document.getElementById('add_to_cart_button');
+      if (oldAvailAble && newAvailable) {
+        oldAvailAble.value = newAvailable.value;
+  
+        if (newAvailable.value === 'false') {
+          addToCartButton.innerText = "Sold Out";
+          addToCartButton.classList.add('text-red-600');
+          addToCartButton.style.cursor = 'not-allowed';
+          addToCartButton.disabled = true;
+          addToCartButton.style.opacity = '0.5';
+        } else if (newAvailable.value === 'true') {
+          addToCartButton.innerText = "Add to Cart";
+          addToCartButton.classList.remove('text-red-600');
+          addToCartButton.style.cursor = 'pointer';
+          addToCartButton.disabled = false;
+          addToCartButton.style.opacity = '1';
+        }
+      }
+  
+      // Update feature image
+      const oldProductFeatureImage = document.getElementById('product_feature_image');
+      const newProductFeatureImage = html.getElementById('product_feature_image');
+      if (oldProductFeatureImage && newProductFeatureImage) {
+        oldProductFeatureImage.src = newProductFeatureImage.src;
+      }
+    })
+    .catch((error) => {
+      alert('internal server error')
+      console.error("Failed to update price:", error);
+  
+      // Display an error message to the user (optional)
+      const errorMessage = document.getElementById('error_message');
+      if (errorMessage) {
+        errorMessage.innerText = "Failed to update product details. Please try again later.";
+        errorMessage.style.display = 'block';
+      }
+    });
+  }
+  
+  
+   
+    getVariantIdAndUpdate(){
+     
+       // console.log(initialVariantId)
+        const currentUlr = window.location.href
+        const urlObj  = new URL(currentUlr)
+        const variant = urlObj.searchParams.get('variant')
+        productId.innerText = variant
+     //   console.log({variant})
+    }
+  
+  }
+  
+  customElements.define("variant-selector",VariantSelector )
+  
+   
+  })
+</script>

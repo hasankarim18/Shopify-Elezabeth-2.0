@@ -1,0 +1,137 @@
+<div>
+  <div class="carousel product__iamge-slider">
+    image slider ⬇️
+    <ul class="carousel main-carousel product__image-slider">
+
+      {% for media in product.media %}
+        {% assign datalightboxvalue = section.id | append: forloop.index %}
+        {% case media.media_type %}
+          {% when 'image' %}
+            <li
+              {% if forloop.index > 1 %}
+              style="display:none;"
+              {% endif %}
+              class="carousel-cell w-full"
+              data-media-id="{{ media.id }}">
+              {{ media | image_url: width: 2048, height: 2048 | image_tag: width: nil, height: nil, class: 'w-full h-80', data-lightbox: datalightboxvalue, id: 'imagid' }}
+            </li>
+
+          {% when 'external_video' %}
+            <li
+              class="product-single__media carousel-cell"
+              style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100}}%;"
+              data-media-id="{{ media.id }}">
+              {{ media | external_video_tag }}
+            </li>
+          {% when 'video' %}
+            <li class="product-single__media carousel-cell" data-media-id="{{ media.id }}">
+              {{ media | video_tag: controls: true }}
+            </li>
+          {% when 'model' %}
+            <li
+              class="product-single__media carousel-cell"
+              style="padding-top: 100%"
+              data-media-id="{{ media.id }}">
+              {{ media | model_viewer_tag }}
+            </li>
+          {% else %}
+            <li
+              class="product-single__media carousel-cell"
+              style="padding-top: 100%;"
+              data-media-id="{{ media.id }}">
+              {{ media | media_tag }}
+            </li>
+        {% endcase %}
+      {% endfor %}
+    </ul>
+    {% comment %} thumbnail for nav {% endcomment %}
+    <ul class="carousel product-carousel-thumbnail product__image-thumbnail">
+
+      {% for media in product.media %}
+        {% case media.media_type %}
+          {% when 'image' %}
+            <li class="carousel-cell w-full" data-media-id="{{ media.id }}">
+              {{ media | image_url: width: '300', height: '300' | image_tag: width: nil, height: nil, class: 'w-full h-80' }}
+            </li>
+          {% when 'external_video' %}
+            <li
+              class="product-single__media carousel-cell"
+              style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100}}%;"
+              data-media-id="{{ media.id }}">
+              {{ media | external_video_tag: class: 'w-full h-full' }}
+            </li>
+          {% when 'video' %}
+            <li class="product-single__media carousel-cell" data-media-id="{{ media.id }}">
+              {{ media | video_tag: controls: true, class: 'w-full h-full' }}
+            </li>
+          {% when 'model' %}
+            <li
+              class="product-single__media carousel-cell"
+              style="padding-top: 100%"
+              data-media-id="{{ media.id }}">
+              {{ media | model_viewer_tag }}
+            </li>
+          {% else %}
+            <li
+              class="product-single__media carousel-cell"
+              style="padding-top: 100%;"
+              data-media-id="{{ media.id }}">
+              {{ media | media_tag }}
+            </li>
+        {% endcase %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<style>
+  .product-media {
+    overflow: hidden;
+  }
+
+  .carousel img {
+    object-fit: cover;
+  }
+  /* when flickity initialized */
+  .product__image-slider.flickity-enabled .carousel-cell {
+    display: block !important;
+  }
+  .product__image-thumbnail.flickity-enabled .carousel-cell {
+    width: 120px;
+    height: 120px;
+    margin-right: 8px;
+  }
+
+  .product__image-thumbnail.flickity-enabled .carousel-cell.is-seleted img {
+    border: 1px solid #000
+  }
+</style>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+       
+   let elem = document.querySelector('.main-carousel');
+   let flkty = new Flickity( elem, {
+    // options
+    cellAlign: 'left',
+    contain: true,
+    daragable:false,
+    wrapAround: true,
+    autoPlay: false,
+    pauseAutoPlayOnHover: true,
+    lazyLoad: 2,
+    pageDots: false
+    });  
+    
+    let productCarouselThumb = document.querySelector('.product-carousel-thumbnail')
+  
+    let flkty2 = new Flickity ( productCarouselThumb, {
+        asNavFor: '.main-carousel',
+        contain:true,
+        pageDots: false,
+        prevNextButtons: false
+    } )
+  
+  });
+</script>

@@ -23,7 +23,21 @@
     <script defer src="{{ 'alpine.min.js' |  asset_url }}"></script>
 
 
-  </head>
+</head>
+
+  {% comment %} #Flickity {% endcomment %}
+  {{ 'flickity.css' | asset_url | stylesheet_tag }}
+
+  <script
+    defer
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+  <script defer src="{{ 'flickity.pkgd.min.js' |  asset_url }}"></script>
+
+  {% comment %} #Flickity carosal end {% endcomment %}
+
+
   <body class=" template-name-{{ template.name }}">
     {% section 'header' %}
     <main role="main ">
