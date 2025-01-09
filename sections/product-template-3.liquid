@@ -176,8 +176,7 @@
   
     updatePrice() {
   fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
-    .then((response) => {
-      console.log(response)
+    .then((response) => {    
       if (response.status == 200) {
         return response.text();
       }else{       
