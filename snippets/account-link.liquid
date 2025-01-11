@@ -1,0 +1,37 @@
+{% if shop.customer_accounts_enabled == true %}
+  {% if customer %}
+    <div class="dropdown dropdown-hover">
+      <div
+        tabindex="0"
+        role="button"
+        class="btn m-1"
+        tabindex="0"
+        role="button">
+        {% render 'icon-user'
+          , class: 'w-6 h-6 text-black hover:text-green-600' %}
+      </div>
+      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+        <li>
+          <a href="{{ routes.account_url }}">Go to account</a>
+        </li>
+        <li>
+          <a href="{{ routes.account_logout_url }}">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+  {% else %}
+    <div class="flex gap-2 items-center justify-center">
+      <a href="{{ routes.account_login_url }}" class="btn btn-primary  rounded-md btn-sm font-bold  ">
+        {{ 'customer.login.title' | t }}
+      </a>
+      {% if shop.customer_accounts_optional %}
+        <span>or</span>
+        <a href="{{ routes.account_register_url }} " class="btn btn-sm  btn-accent text-white rounded-md font-bold">
+          {{ 'customer.register.title' | t }}
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+
+{% endif %}

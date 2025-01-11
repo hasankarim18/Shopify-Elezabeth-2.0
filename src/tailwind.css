@@ -22,7 +22,7 @@
 
 @layer base {
   a {
-    @apply text-blue-400 hover:text-blue-600 transition-colors cursor-pointer;
+    @apply text-blue-400;
   }
   input {
     @apply cursor-pointer;

@@ -1,0 +1,43 @@
+<div>
+  <div class="container">
+    <span>tefaw78518@sfxeur.com // passw</span>
+    <div class="template-login flex justify-center">
+
+      <div class="px-4 md:px-8 max-w-full md:max-w-4xl w-full">
+        {% form 'customer_login'
+          , return_to: routes.collections_url %}
+          {{ form.errors | default_errors }}
+          <div class="email my-3 flex flex-col">
+            <label for="email" class="sr-only capitalize">
+              email address
+            </label>
+            <input
+              placeholder="Email Address"
+              class="border-2 p-2 cursor-text focus:outline-none outline-none focus:border-teal-500 transition-all duration-200"
+              type="email"
+              name="customer[email]">
+          </div>
+          {% if form.password_needed %}
+            <div class="password my-3  flex flex-col">
+              <label class="sr-only" for="password">Password</label>
+              <input
+                placeholder="Password"
+                class="border-2 p-2 cursor-text focus:outline-none outline-none focus:border-teal-500 transition-all duration-200"
+                type="password"
+                id="password"
+                name="customer[password]">
+            </div>
+          {% endif %}
+
+          <div class="my-3 submit flex justify-end">
+
+            <input
+              class="btn btn-primary"
+              type="submit"
+              value="Sign in">
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
