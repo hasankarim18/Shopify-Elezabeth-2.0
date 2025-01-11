@@ -9,12 +9,83 @@
       <a class="link" href="{{ routes.account_logout_url }}">Logout</a>
     </div>
     {% comment %} order history and info {% endcomment %}
-    <div class="order-history-info my-5 grid grid-cols-1 md:grid-cols-6">
+    <div class="order-history-info gap-6 my-5 grid grid-cols-1 md:grid-cols-6">
       <div class="order-history md:col-span-5">
-        order history
+        {% assign number_of_orders = customer.orders | size %}
+        {% if number_of_orders > 0 %}
+          <div class="w-full my-6 md:my-12">
+            <h2 class="text-3xl my-4">Ordre History</h2>
+            <hr>
+            {% paginate customer.orders by 1 %}
+              <table class="my-3 w-full  table-auto border border-collapse border-slate-500">
+                <thead>
+                  <tr class="p-4">
+                    <th>ORDER</th>
+                    <th>Date</th>
+                    <th>Pyamen Status</th>
+                    <th>Fulfilment Status</th>
+                    <th>Image</th>
+                    <th>View Product</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in customer.orders %}
+                    <tr class="my-3 border-2 p-4">
+                      <td class="p-4 text-center">{{ order.name | link_to: order.customer_url }}</td>
+                      <td class="p-4 text-center">{{ order.created_at | date: "%b %d, %Y" }}</td>
+                      <td class="p-4 text-center">
+                        {{ order.financial_status_label }}
+                      </td>
+                      <td class="p-4 text-center">
+                        <span class="badge badge-neutral">{{ order.fulfillment_status_label }}</span>
+                      </td>
+                      <td class="p-4 text-center">
+                        {% if order.first.image %}
+                          <img
+                            src="{{ order.image | image_url }}"
+                            width=""
+                            height=""
+                            alt=""
+                            loading="lazy"
+                            class="w-full h-20">
+                        {% else %}
+                          <span>No image</span>
+                        {% endif %}
+                      </td>
+                      <td class="p-4 text-center">
+                        view product
+                      </td>
+                      <td class="p-4 text-center">
+                        {{ order.total_price | money }}
+                      </td>
+                    </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+              {% render "pagination"
+                , paginate: paginate
+                , section: section % %}
+            {% endpaginate %}
+          </div>
+        {% else %}
+          <div class="w-full h-80 flex flex-col gap-4 iems-center justify-center">
+            <h2 class="text-base md:text-xl font-medium">
+              You don't have any orders
+            </h2>
+            <a class="link" href="{{ routes.all_products_collection_url }}">Continue shopping</a>
+          </div>
+        {% endif %}
       </div>
       <div class="user-info md:col-span-1 ">
-        user info
+        <p>{{ customer.email }}</p>
+        <p>
+          {{ customer.default_address | format_address }}
+        </p>
+        <div>
+          <a class="link-info hover:link-primary" href="{{ routes.account_addresses_url }}">View Addresses</a>
+        </div>
       </div>
     </div>
   </div>
