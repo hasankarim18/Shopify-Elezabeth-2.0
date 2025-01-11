@@ -1,0 +1,124 @@
+<div style=" 
+padding-top:{{ section.settings.padding_top }}px;
+padding-bottom:{{ section.settings.padding_bottom }}px;
+" class="{{ template.name }}">
+
+  <div class="container">
+    <h2 class="text-3xl text-center">{{ section.settings.page_title }}</h2>
+    <div class="customer_form_layout">
+      {% form 'create_customer'
+        , return_to: routes.all_products_collection_url %}
+        {% comment %} form errors {% endcomment %}
+        {% if form.errors %}
+          <div class="bg-warning ">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div class="my-3">
+            <label class="sr-only" for="first_name">First Name</label>
+            <input
+              class="login_input"
+              placeholder="First name"
+              type="text"
+              name="customer[first_name]">
+          </div>
+          <div class="my-3">
+            <label class="sr-only" for="first_name">Last Name</label>
+            <input
+              class="login_input"
+              placeholder="Last name"
+              type="text"
+              name="customer[last_name]">
+          </div>
+
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div class="email">
+            <label class="sr-only" for="email">Email</label>
+            <input
+              placeholder="Email address"
+              class="login_input"
+              type="email"
+              name="customer[email]">
+          </div>
+
+          <div class="password">
+            <label class="sr-only" for="password">Password</label>
+            <input
+              placeholder="Password"
+              class="login_input"
+              type="password"
+              name="customer[password]">
+          </div>
+        </div>
+        {% comment %} extra info {% endcomment %}
+        <div class="mt-3">
+          <div class="">
+            <label class="sr-only" for="register_address">Address</label>
+            <textarea
+              placeholder="Write your address"
+              class="login_input resize-none"
+              name="customer[note][address]"
+              id="register_address"></textarea>
+          </div>
+          <div class="">
+            <label class="sr-only" for="customer_birst_day">Address</label>
+            <textarea
+              placeholder="Write your address"
+              class="login_input resize-none"
+              name="customer[note][birsthday]"
+              id="customer_birst_day"></textarea>
+          </div>
+        </div>
+        {% comment %} submit button {% endcomment %}
+        <div class="submit mt-3">
+          <input
+            class="w-full btn btn-outline hover:text-white font-bold text-xl"
+            type="submit"
+            value="Sign Up">
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Template Register",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "page_title",
+        "default": "t:sections.template-registr.page_title",
+        "label": "Page title"
+      },
+      {
+        "type": "range",
+        "default": 20,
+        "label": "Padding top",
+        "id": "padding_top",
+        "min": 10,
+        "max": 100,
+        "step": 10
+      },
+      {
+        "type": "range",
+        "default": 20,
+        "label": "Padding bottom",
+        "id": "padding_bottom",
+        "min": 10,
+        "max": 100,
+        "step": 10
+      }
+    ],
+    "presets": [
+      {
+        "name": "Template Register",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}

@@ -2471,6 +2471,9 @@
     "main-register": {
       "name": "Registration"
     },
+    "template-registr": {
+      "page_title": "Create your account"
+    },
     "main-reset-password": {
       "name": "Password reset"
     },

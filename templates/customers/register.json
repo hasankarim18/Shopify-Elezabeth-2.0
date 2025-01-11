@@ -1,0 +1,12 @@
+{
+  "name": "Template Register",
+  "wrapper": "section#template-login",
+  "sections": {
+    "template": {
+      "type": "template-register",
+      "blocks": {}
+    }
+  },
+
+  "order": ["template"]
+}

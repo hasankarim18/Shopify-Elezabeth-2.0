@@ -18,6 +18,13 @@
   .quantity_button {
     @apply text-3xl text-gray-900 hover:text-gray-800 cursor-pointer;
   }
+  .customer_form_layout {
+    @apply px-4 mx-auto md:px-8 max-w-full md:max-w-4xl w-full;
+  }
+
+  .login_input {
+    @apply border p-4 w-full outline-none hover:outline-none focus:outline-none focus:border-teal-500 duration-200 transition-all cursor-text text-xl;
+  }
 }
 
 @layer base {

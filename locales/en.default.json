@@ -9,11 +9,19 @@
   "customer": {
     "login": {
       "title": "Login",
-      "singin": "sign in"
+      "singin": "sign in",
+      "heading": "Sign in to your account"
     },
     "register": {
       "title": "Register",
-      "signup": "sign up"
+      "signup": "sign up",
+      "page_title": "Create your account"
+    },
+    "password": {
+      "recover": {
+        "title": "Recover password",
+        "input_placeholder": "Your email address"
+      }
     }
   }
 }

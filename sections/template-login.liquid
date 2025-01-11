@@ -1,12 +1,25 @@
-<div>
+<div class="" x-data="{ open: true }">
+  <style>
+    [x-cloak] {
+      display: none;
+    }
+  </style>
   <div class="container">
     <span>tefaw78518@sfxeur.com // passw</span>
-    <div class="template-login flex justify-center">
-
+    <div x-show="open" class="template-login flex justify-center">
       <div class="px-4 md:px-8 max-w-full md:max-w-4xl w-full">
-        {% form 'customer_login'
+        <h2 class="text-3xl text-center">
+          {{ 'customer.login.heading' | t }}
+        </h2>
+        {% form 'customer_login' 
           , return_to: routes.collections_url %}
-          {{ form.errors | default_errors }}
+          <div>
+            {% if form.errors %}
+              <div class="p-4 text-center bg-warning">
+                {{ form.errors | default_errors }}
+              </div>
+            {% endif %}
+          </div>
           <div class="email my-3 flex flex-col">
             <label for="email" class="sr-only capitalize">
               email address
@@ -29,14 +42,56 @@
             </div>
           {% endif %}
 
-          <div class="my-3 submit flex justify-end">
-
+          <div class="my-3 submit flex justify-between items-center">
+            <span x-on:click="open = ! open" class="underline cursor-pointer hover:text-primary">Forgot you password?</span>
             <input
               class="btn btn-primary"
               type="submit"
               value="Sign in">
           </div>
+
         {% endform %}
+      </div>
+
+
+    </div>
+    {% comment %} recovery password {% endcomment %}
+    <div
+      x-cloak
+      x-show="!open"
+      class="recover_password px-4 md:px-8 max-w-full md:max-w-4xl w-full  mx-auto">
+      <h2 class="text-3xl text-center">
+        Recover your passowrd
+      </h2>
+      <div>
+        {% form 'recover_customer_password' 
+          , return_to: routes.collections_url %}
+          <div>
+            {% if form.errors %}
+              <div class="p-4 text-center bg-warning">
+                {{ form.errors | default_errors }}
+              </div>
+            {% endif %}
+          </div>
+          <div class="email my-3 flex flex-col">
+            <label for="email" class="sr-only capitalize">
+              email address
+            </label>
+            <input
+              placeholder="{{ 'customer.password.recover.input_placeholder' | t }}"
+              class="border-2 p-2 cursor-text focus:outline-none outline-none focus:border-teal-500 transition-all duration-200"
+              type="email"
+              name="email">
+          </div>
+          <div class="my-3 submit flex justify-end">
+            <input
+              class="btn btn-accent"
+              type="submit"
+              value="{{ 'customer.password.recover.title' | t }}">
+          </div>
+          <p x-on:click="open = true" class="my-0 text-center underline cursor-pointer mb-3 hover:text-primary">Cancel</p>
+        {% endform %}
+
       </div>
     </div>
   </div>
