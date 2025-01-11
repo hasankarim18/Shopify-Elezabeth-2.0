@@ -62,13 +62,13 @@ padding-bottom:{{ section.settings.padding_bottom }}px;
               name="customer[note][address]"
               id="register_address"></textarea>
           </div>
-          <div class="">
-            <label class="sr-only" for="customer_birst_day">Address</label>
-            <textarea
-              placeholder="Write your address"
+          <div class="my-3">
+            <label class="sr-only" for="customer_birst_day">Date of birth</label>
+            <input
+              type="date"
               class="login_input resize-none"
-              name="customer[note][birsthday]"
-              id="customer_birst_day"></textarea>
+              name="customer[note][birthday]"
+              id="customer_birst_day" />
           </div>
         </div>
         {% comment %} submit button {% endcomment %}

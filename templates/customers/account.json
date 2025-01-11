@@ -1,0 +1,12 @@
+{
+  "name": "Template Account",
+  "wrapper": "section#template-login",
+  "sections": {
+    "template": {
+      "type": "template-customer-account",
+      "blocks": {}
+    }
+  },
+
+  "order": ["template"]
+}

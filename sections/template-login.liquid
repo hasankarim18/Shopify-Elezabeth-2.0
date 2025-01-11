@@ -57,7 +57,7 @@
     </div>
     {% comment %} recovery password {% endcomment %}
     <div
-      x-cloak
+      x-cloak="display:none"
       x-show="!open"
       class="recover_password px-4 md:px-8 max-w-full md:max-w-4xl w-full  mx-auto">
       <h2 class="text-3xl text-center">
@@ -93,6 +93,22 @@
         {% endform %}
 
       </div>
+    </div>
+
+    {% comment %} guest checkout {% endcomment %}
+    <div class="my-6">
+      <h2>Checkout as guest</h2>
+      {% if shop.checkout.guest_login %}
+        {% form 'guest_login' %}
+          <div class="submit">
+            <input
+              class="w-full btn btn-neutral"
+              type="submit"
+              value="Continue as guest">
+          </div>
+        {% endform %}
+
+      {% endif %}
     </div>
   </div>
 </div>

@@ -1,0 +1,21 @@
+<div class="customer-account">
+  <div class="container">
+    <h2 class="text-3xl">Account</h2>
+    <div class="flex gap-4">
+      <span>
+        {% render 'icon-user'
+          , class: "w-6 h-6" %}
+      </span>
+      <a class="link" href="{{ routes.account_logout_url }}">Logout</a>
+    </div>
+    {% comment %} order history and info {% endcomment %}
+    <div class="order-history-info my-5 grid grid-cols-1 md:grid-cols-6">
+      <div class="order-history md:col-span-5">
+        order history
+      </div>
+      <div class="user-info md:col-span-1 ">
+        user info
+      </div>
+    </div>
+  </div>
+</div>

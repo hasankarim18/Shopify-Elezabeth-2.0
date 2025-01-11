@@ -1533,8 +1533,8 @@ input.tab:checked + .tab-content,
     --btn-color: var(--fallback-a);
   }
 
-  .btn-success {
-    --btn-color: var(--fallback-su);
+  .btn-neutral {
+    --btn-color: var(--fallback-n);
   }
 }
 
@@ -1596,8 +1596,8 @@ input.tab:checked + .tab-content,
     --btn-color: var(--a);
   }
 
-  .btn-success {
-    --btn-color: var(--su);
+  .btn-neutral {
+    --btn-color: var(--n);
   }
 }
 
@@ -1607,10 +1607,10 @@ input.tab:checked + .tab-content,
   outline-color: var(--fallback-a,oklch(var(--a)/1));
 }
 
-.btn-success {
+.btn-neutral {
   --tw-text-opacity: 1;
-  color: var(--fallback-suc,oklch(var(--suc)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-su,oklch(var(--su)/1));
+  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
+  outline-color: var(--fallback-n,oklch(var(--n)/1));
 }
 
 .btn.glass {
@@ -2667,8 +2667,8 @@ input.tab:checked + .tab-content,
   cursor: text;
   border-width: 1px;
   padding: 1rem;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   outline: 2px solid transparent;
   outline-offset: 2px;
   transition-property: all;
@@ -2733,12 +2733,20 @@ input.tab:checked + .tab-content,
   top: -0.5rem;
 }
 
+.right-1 {
+  right: 0.25rem;
+}
+
 .top-0 {
   top: 0px;
 }
 
 .top-4 {
   top: 1rem;
+}
+
+.top-\[25\%\] {
+  top: 25%;
 }
 
 .z-10 {
@@ -2926,6 +2934,10 @@ input.tab:checked + .tab-content,
   margin-top: 0.5rem;
 }
 
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
@@ -2940,10 +2952,6 @@ input.tab:checked + .tab-content,
 
 .mt-\[2px\] {
   margin-top: 2px;
-}
-
-.mt-3 {
-  margin-top: 0.75rem;
 }
 
 .block {
@@ -4058,11 +4066,6 @@ input.tab:checked + .tab-content,
   background-color: rgb(129 140 248 / var(--tw-bg-opacity, 1));
 }
 
-.hover\:bg-indigo-700:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(67 56 202 / var(--tw-bg-opacity, 1));
-}
-
 .hover\:bg-red-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(248 113 113 / var(--tw-bg-opacity, 1));
@@ -4251,8 +4254,16 @@ input.tab:checked + .tab-content,
 }
 
 @media (min-width: 768px) {
+  .md\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
   .md\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .md\:col-span-5 {
+    grid-column: span 5 / span 5;
   }
 
   .md\:col-span-8 {
@@ -4313,6 +4324,10 @@ input.tab:checked + .tab-content,
 
   .md\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .md\:grid-cols-\[1\.5fr_1fr\] {

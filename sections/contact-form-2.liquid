@@ -1,7 +1,7 @@
 <div class="contact-form-2  p-8 rounded-lg shadow-lg">
   <div class="container ">
     <div class="max-w-2xl bg-indigo-50 p-4 mx-auto w-full">
-      <h2 class="text-center">Contact us</h2>
+      <h2 class="text-center">{{ section.settings.title }}</h2>
       {% form 'contact' %}
         <div class="text-red-500 mb-4">
           {{ form.errors | default_errors }}
@@ -14,7 +14,7 @@
               type="text"
               name="contact[first_name]"
               id="first-name"
-              class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              class="w-full cursor-text px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
 
           <!-- Last Name -->
@@ -24,7 +24,7 @@
               type="text"
               name="contact[last_name]"
               id="last-name"
-              class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              class="w-full cursor-text px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
         </div>
         <div class="phone-emeil grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -35,7 +35,7 @@
               type="tel"
               name="contact[phone]"
               id="phone"
-              class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              class="w-full cursor-text px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
 
           <!-- Email -->
@@ -45,7 +45,7 @@
               type="text"
               name="contact[email]"
               id="email"
-              class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              class="w-full cursor-text px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
         </div>
         <div class="order-number-message grid grid-cols-12  gap-4">
@@ -56,7 +56,7 @@
               type="text"
               name="contact[order_number]"
               id="order-number"
-              class="w-full px-4  py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              class="w-full cursor-text px-4  py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
 
           <!-- Message -->
@@ -65,7 +65,7 @@
               placeholder="Write Your Message"
               name="contact[body]"
               id="message"
-              class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+              class="w-full px-4 cursor-text py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
           </div>
         </div>
         <!-- Submit Button -->
@@ -73,7 +73,7 @@
           <input
             type="submit"
             value="Send"
-            class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            class="w-full cursor-pointer py-3 btn btn-neutral" />
         </div>
       {% endform %}
     </div>
@@ -85,7 +85,14 @@
     "name": "Contact From 2",
     "tag": "section",
     "class": "contact-form-2-wrapper",
-    "settings": [],
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "Contact us",
+        "label": "Coontact form title"
+      }
+    ],
     "presets": [
       {
         "name": "Contact From 2",

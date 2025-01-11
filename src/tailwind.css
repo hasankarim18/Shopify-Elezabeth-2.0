@@ -23,7 +23,7 @@
   }
 
   .login_input {
-    @apply border p-4 w-full outline-none hover:outline-none focus:outline-none focus:border-teal-500 duration-200 transition-all cursor-text text-xl;
+    @apply border p-4 w-full outline-none hover:outline-none focus:outline-none focus:border-teal-500 duration-200 transition-all cursor-text text-sm;
   }
 }
 
