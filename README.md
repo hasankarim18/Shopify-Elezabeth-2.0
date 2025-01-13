@@ -6,6 +6,7 @@
 - [Flickity -- used in template-product2.liquid](https://flickity.metafizzy.co/)
 - [lightbox - by Lokesh Dhakar](https://lokeshdhakar.com/projects/lightbox2/#getting-started)
 - [sweet alert](https://sweetalert2.github.io/)
+- [aos](https://michalsnik.github.io/aos/)
 
 #### [Gti Repo Link](https://github.com/hasankarim18/Shopify-Elezabeth-2.0)
 

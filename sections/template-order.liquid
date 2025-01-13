@@ -13,6 +13,7 @@
       <a href="{{ routes.account_url }}" class="text-blue-700 hover:text-blue-900 underline font-medium">Back to account</a>
     </div>
     <div>
+
       <ul class="">
         {% for line_item in order.line_items %}
           <li class="w-full border border-gray-200 divided-y rounded-sm mb-4  p-4">
@@ -99,6 +100,27 @@
           </li>
         {% endfor %}
       </ul>
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-12 border-gray-200 my-6 rounded-md">
+        {% comment %} billing address {% endcomment %}
+        <div>
+          <h1 class="font-medium mb-4">Billin Address</h1>
+          <p class="text-gray-600">
+            {{ order.billing_address | format_address }}
+          </p>
+        </div>
+        <div>
+          <h1 class="font-medium mb-4">Payment Information</h1>
+          {% for transaction in order.transactions %}
+            <div class="mb-4">
+              {% assign credit_card_company = transaction.payment_details.credit_card_company %}
+              {% if credit_card_company %}
+                <p>{{ credit_card_company }}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+        <div></div>
+      </div>
     </div>
   </div>
 </div>
