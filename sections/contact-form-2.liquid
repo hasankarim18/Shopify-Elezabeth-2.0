@@ -3,7 +3,7 @@
   data-aos-easing
   functions="liner"
   data-aos-duration="300"
-  data-aos="fade-up"
+  data-aos="{{ section.settings.aos }}"
   class="contact-form-2  p-8 rounded-lg shadow-lg">
   <div class="container ">
     <div class="max-w-2xl bg-indigo-50 p-4 mx-auto w-full">
@@ -97,6 +97,53 @@
         "id": "title",
         "default": "Contact us",
         "label": "Coontact form title"
+      },
+      {
+        "type": "select",
+        "id": "aos",
+        "label": "Aos Animation Options",
+        "options": [
+          {
+            "value": "",
+            "label": "No animation"
+          },
+          {
+            "value": "fade",
+            "label": "fade"
+          },
+          {
+            "value": "fade-up",
+            "label": "fade up"
+          },
+          {
+            "label": "fade-down",
+            "value": "fade down"
+          },
+          {
+            "value": "fade-left",
+            "label": "fade left"
+          },
+          {
+            "value": "fade-right",
+            "label": "fade right"
+          },
+          {
+            "value": "fade-up-right",
+            "label": "fade up right"
+          },
+          {
+            "value": "fade-up-left",
+            "label": "fade up left"
+          },
+          {
+            "value": "fade-down-right",
+            "label": "fade down right"
+          },
+          {
+            "value": "fade-down-left",
+            "label": "fade down left"
+          }
+        ]
       }
     ],
     "presets": [
