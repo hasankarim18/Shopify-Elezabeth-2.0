@@ -16,7 +16,7 @@
           <div class="w-full my-6 md:my-12">
             <h2 class="text-3xl my-4">Ordre History</h2>
             <hr>
-            {% paginate customer.orders by 1 %}
+            {% paginate customer.orders by 12 %}
               <table class="my-3 w-full  table-auto border border-collapse border-slate-500">
                 <thead>
                   <tr class="p-4">
@@ -30,6 +30,7 @@
                   </tr>
                 </thead>
                 <tbody>
+
                   {% for order in customer.orders %}
                     <tr class="my-3 border-2 p-4">
                       <td class="p-4 text-center">{{ order.name | link_to: order.customer_url }}</td>
@@ -41,16 +42,16 @@
                         <span class="badge badge-neutral">{{ order.fulfillment_status_label }}</span>
                       </td>
                       <td class="p-4 text-center">
-                        {% if order.first.image %}
+                        {% if order.line_items.first.image %}
                           <img
-                            src="{{ order.image | image_url }}"
+                            src="{{ order.line_items.first.image | image_url }}"
                             width=""
                             height=""
                             alt=""
                             loading="lazy"
                             class="w-full h-20">
                         {% else %}
-                          <span>No image</span>
+                          {{ 'product-1' | placeholder_svg_tag: 'w-full h-20' }}
                         {% endif %}
                       </td>
                       <td class="p-4 text-center">

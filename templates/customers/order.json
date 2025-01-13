@@ -1,0 +1,12 @@
+{
+  "name": "Template Order",
+  "wrapper": "section#template-login",
+  "sections": {
+    "template": {
+      "type": "template-order",
+      "blocks": {}
+    }
+  },
+
+  "order": ["template"]
+}
