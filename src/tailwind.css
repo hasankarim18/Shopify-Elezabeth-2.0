@@ -1,10 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+* {
+  box-sizing: border-box;
+}
 
 @layer components {
   .container {
-    @apply max-w-7xl w-full px-4 md:px-5 mx-auto my-0;
+    @apply w-full px-4 md:px-5 mx-auto my-0;
+    max-width: 1240px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   .swiper-button-prev,
   .swiper-button-next {
@@ -22,8 +28,30 @@
     @apply px-4 mx-auto md:px-8 max-w-full md:max-w-4xl w-full;
   }
 
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
   .login_input {
-    @apply border p-4 w-full outline-none hover:outline-none focus:outline-none focus:border-teal-500 duration-200 transition-all cursor-text text-sm;
+    @apply p-4 w-full border-2 border-gray-200 outline-none hover:outline-none focus:outline-none focus:border-teal-500 duration-200 transition-all cursor-text text-sm;
+  }
+  .custom-overflow-hidden {
+    @apply overflow-hidden;
+  }
+
+  .address-form label {
+    @apply text-xs items-center;
+  }
+  .address-form input {
+    @apply p-2;
+  }
+  .address-form textarea {
+    @apply p-2;
+  }
+  .address-form select {
+    @apply p-2 w-full col-span-3;
+  }
+  .address-form select option {
+    @apply p-2 w-full;
   }
 }
 
