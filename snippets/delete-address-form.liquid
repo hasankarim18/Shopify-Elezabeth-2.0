@@ -1,0 +1,15 @@
+{% comment %} 
+  ** parameters 
+  1. address (from the loop) 
+{% endcomment %}
+
+<form
+  class="address-delete-form"
+  method="post"
+  action="/account/addresses/{{ address.id }}">
+  <input
+    type="hidden"
+    name="_method"
+    value="delete">
+  <button class="btn btn-outline btn-error hover:btn-error" type="submit">Delete</button>
+</form>

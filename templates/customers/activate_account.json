@@ -1,0 +1,12 @@
+{
+  "name": "Template Activate Account",
+  "wrapper": "section#template-activate-account",
+  "sections": {
+    "template": {
+      "type": "template-activate-account",
+      "blocks": {}
+    }
+  },
+
+  "order": ["template"]
+}

@@ -1,0 +1,134 @@
+{% comment %} 
+                                                                      Takes 3 parameter 
+                                                                      1. form:from
+                                                                      2. address:address
+                                                                      3. type: 'string' 
+                                                                      4. if it is a edit form then it takes another parameter as
+                                                                        
+{% endcomment %}
+<div class="form_wrapper">
+  {% comment %} first name {% endcomment %}
+  <div class="mb-4  grid grid-cols-4 ">
+    <label for="address_fname_{{form.id}}" class="uppercase inline-flex text-gray-700 items-center  col-span-1 text-xs font-medium mb-2">First Name</label>
+    <input
+      id="address_fname_{{form.id}}"
+      value="{{ form.first_name }}"
+      class="login_input p-2 w-full col-span-3 "
+      type="text"
+      name="address[first_name]">
+  </div>
+  {% comment %} last name {% endcomment %}
+  <div class="mb-4 grid grid-cols-4 items-center">
+    <label for="address_lname_{{form.id}}" class="uppercase col-span-1 text-xs items-center text-gray-700 font-medium mb-2">Last Name</label>
+    <input
+      id="address_lname_{{form.id}}"
+      value="{{ form.last_name }}"
+      class="login_input w-full p-2 col-span-3"
+      type="text"
+      name="address[last_name]">
+  </div>
+  {% comment %} company {% endcomment %}
+  <div class="mb-4 grid grid-cols-4 items-center flex-center">
+    <label for="address_company_{{form.id}}" class=" text-xs items-center col-span-1 uppercase text-gray-700 font-medium mb-2">Company</label>
+    <input
+      id="address_company_{{form.id}}"
+      value="{{ form.company }}"
+      class="login_input w-full p-2 col-span-3"
+      type="text"
+      name="address[company]">
+  </div>
+  {% comment %} address 1 {% endcomment %}
+  <div class="mb-4 flex-center grid grid-cols-4 items-center">
+    <label for="address_address1_{{form.id}}" class="uppercase items-center text-xs col-span-1 text-gray-700 font-medium mb-2">Address 1</label>
+    <textarea
+      id="address_address1_{{form.id}}"
+      value="{{ form.address1 }}"
+      class="login_input w-full col-span-3"
+      type="text"
+      name="address[address1]">{{ form.address1 }}</textarea>
+  </div>
+  {% comment %} address 2 {% endcomment %}
+  <div class="mb-4 grid grid-cols-4 items-center flex-center">
+    <label for="address_address2_{{form.id}}" class="uppercase text-gray-700 font-medium mb-2">Address 2</label>
+    <textarea
+      id="address_address2_{{form.id}}"
+      value="{{ form.address2 }}"
+      class="login_input w-full col-span-3"
+      type="text"
+      name="address[address2]">{{ form.address2 }}</textarea>
+  </div>
+  {% comment %} city {% endcomment %}
+  <div class="mb-4 grid grid-cols-4 items-center flex-center">
+    <label for="city_{{form.id}}" class="uppercase text-gray-700 font-medium mb-2">City</label>
+    <input
+      id="address_city_{{form.id}}"
+      value="{{ form.city }}"
+      class="login_input w-full col-span-3"
+      type="text"
+      name="address[city]" />
+  </div>
+  {% comment %} country {% endcomment %}
+  <div class="mb-4 grid grid-cols-4 items-center flex-center">
+    <label for="address_country_{{form.id}}" class="uppercase text-gray-700 font-medium mb-2">Country -- {{ form.country }}</label>
+
+    <select
+      data-country-selector
+      data-id="{{ form.id }}"
+      value="{{ form.country }}"
+      class="border-2 w-full col-span-3 border-gray-200 p-4"
+      name="address[country]"
+      id="address_country_{{form.id}}">
+      {{ all_country_option_tags }}
+    </select>
+  </div>
+  {% comment %} province {% endcomment %}
+  <div class="mb-4 grid grid-cols-4 items-center flex-center">
+    <label for="address_province_{{form.id}}" class="uppercase text-gray-700 font-medium mb-2">Province</label>
+    <select
+      value="{{ form.province }}"
+      class="border-2 w-full col-span-3 border-gray-200 p-4"
+      name="address[province]"
+      id="address_province_{{form.id}}"></select>
+  </div>
+  {% comment %} zip/postal code {% endcomment %}
+  <div class="mb-4 grid grid-cols-4 items-center flex-center">
+    <label for="city_{{form.id}}" class="uppercase text-gray-700 font-medium mb-2">Zip / Postal code</label>
+    <input
+      id="address_city_{{form.id}}"
+      value="{{ form.zip }}"
+      class="login_input w-full col-span-3"
+      type="text"
+      name="address[zip]" />
+  </div>
+  {% comment %} Phone number {% endcomment %}
+  <div class="mb-4 grid grid-cols-4 items-center flex-center">
+    <label for="city_{{form.id}}" class="uppercase text-gray-700 font-medium mb-2">Phone Number</label>
+    <input
+      id="address_city_{{form.id}}"
+      value="{{ form.zip }}"
+      class="login_input w-full col-span-3"
+      type="tel"
+      name="address[address[phone]]" />
+  </div>
+
+  <div class="my-3 flex gap-2 justify-start items-center">
+    {{ form.set_as_default_checkbox }}
+    <label class="cursor-pointer" for="address_default_address_new">Set as default address</label>
+  </div>
+
+
+  <div class="my-4 flex gap-8 px-4 justify-center">
+    <button type="reset" class="btn btn-outline btn-warning w-1/2  uppercase hover:btn-error">Reset Form</button>
+    <button type="submit" class="btn btn-outline w-1/2 uppercase  hover:btn-success">{{ type }}</button>
+  </div>
+
+</div>
+
+{% comment %} 
+                              
+  
+  <div x-data="{ open : false}">
+    {% render 'form-contaner' %}
+  </div>
+                              
+ {% endcomment %}

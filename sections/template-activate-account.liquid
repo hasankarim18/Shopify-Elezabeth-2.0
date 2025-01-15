@@ -1,0 +1,125 @@
+<!-- /templates/customers/activate_account.liquid -->
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h1 class="mt-6 text-center text-3xl font-bold text-gray-700">
+        Activate account
+      </h1>
+      <p class="mt-4 text-center">create password to activate your account</p>
+    </div>
+    <div>
+      {% form 'activate_customer_password' %}
+        <div>
+          <label class="sr-only" for="password-{{section.id}}">Password</label>
+          <div class="relative">
+            <input
+              data-password-field
+              id="password-{{section.id}}"
+              type="password"
+              class="login_input border"
+              placeholder="New Password"
+              autocomplete="new-password"
+              name="customer[password]" />
+            <span data-password-eye-open class="password_eyes hidden">
+              {% render 'icon-eye'
+                , class: 'w-6 h-6' %}</span>
+            <span data-password-eye-close class="password_eyes">
+              {% render 'icon-eye-close'
+                , class: 'w-6 h-6' %}</span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="sr-only" for="confirm_password-{{section.id}}">Confirm Password</label>
+          <div class="relative">
+            <input
+              data-password-field
+              id="confirm_password-{{section.id}}"
+              type="password"
+              class="login_input"
+              placeholder="Confirm password"
+              name="customer[password_confirmation]" />
+            <span data-password-eye-close class="password_eyes">
+              {% render 'icon-eye-close'
+                , class: 'w-6 h-6' %}</span>
+            <span data-password-eye-open class="password_eyes hidden">
+              {% render 'icon-eye'
+                , class: 'w-6 h-6' %}</span>
+
+          </div>
+        </div>
+        <div class="my-3">
+          <button type="submit" class="btn btn-outline btn-neutral w-full block">Accept</button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .password_eyes {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+  }
+</style>
+
+<script>
+  
+  
+  class TooglePassword{
+        constructor(){
+            this.initTogglePassword()
+        }
+  
+        initTogglePassword(){
+            const openEyes = document.querySelectorAll('span[data-password-eye-open]')
+            const closeEyes = document.querySelectorAll('span[data-password-eye-close]')
+            const passwordField = document.querySelectorAll('input[data-password-field]')
+            
+  
+            closeEyes.forEach((eye) => {
+               eye.addEventListener('click', (e) => {
+                e.stopPropagation()
+                eye.classList.add('hidden')
+                const parent = eye.parentElement 
+                const otherEye = parent.querySelector('span[data-password-eye-open]')
+                otherEye.classList.remove('hidden')               
+              
+                const input = parent.querySelector('input[data-password-field]')
+                
+                if(input.type === 'password'){
+                    input.type = 'text'
+                }else {
+                     input.type = 'password'
+                }
+  
+               })
+            })
+            openEyes.forEach((eye) => {
+               eye.addEventListener('click', (e) => {
+                e.stopPropagation()
+                eye.classList.add('hidden')
+              //  eye.previousElementSibling.classList.remove('hidden')
+             //   const parent = eye.parentElement 
+                const parent = eye.parentElement 
+                const otherEye = parent.querySelector('span[data-password-eye-close]')
+                otherEye.classList.remove('hidden')
+                const input = parent.querySelector('input[data-password-field]')
+                
+                if(input.type === 'password'){
+                    input.type = 'text'
+                }else {
+                     input.type = 'password'
+                }
+                
+               })
+            })
+  
+            console.log(openEyes)
+        }
+  
+    }
+  
+    const togglePassword = new TooglePassword()
+</script>

@@ -19,7 +19,8 @@
 
         <div x-on:click="mobileMenuOpen = !mobileMenuOpen" class="-mr-2 -my-2 ml-3 md:hidden">
           <button type="button" class="bg-white p-2 inline-flex items-center justify-center focus:outline-none">
-            {% render 'icon-hamburger' %}
+            {% render 'icon-hamburger'
+              , class: 'w-6 transition-all duration-300 h-6 hover:scale-105' %}
           </button>
         </div>
 
@@ -93,7 +94,16 @@
       </div>
     </div>
     {% comment %} #mobile-menu {% endcomment %}
-    <div x-show="mobileMenuOpen" class="absolute z-10 top-0 inset-x-0 p-2 transform origin-top-left md:hidden">
+    <div
+      x-show="mobileMenuOpen"
+      x-transition:enter="transform transition-transform duration-300"
+      x-transition:enter-start="-translate-x-full"
+      x-transition:enter-end="translate-x-1/2"
+      x-transition:leave="transform transition-transform duration-300"
+      x-transition:leave-start="translate-x-ful"
+      x-transition:leave-end="-translate-x-full"
+      class="fixed top-0 left-0 bg-gray-800 text-white w-64 h-screen p-4 shadow-lg z-50 inset-x-0 transform origin-top-left md:hidden"
+      style="display:none;">
       <div class="shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 bg-white w-full">
         <div class="p-5 divide-y-2 divide-gray-50">
 
