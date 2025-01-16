@@ -13,6 +13,12 @@
       "type": "hero-banner",
       "settings": {}
     },
+    "featured_product2": {
+      "type": "featured-product-1",
+      "settings": {
+        "selected_product": "apple-watch-1"
+      }
+    },
     "featured-product": {
       "type": "featured-product-1",
       "settings": {
@@ -41,6 +47,7 @@
   },
   "order": [
     "hero-banner",
+    "featured_product2",
     "featured-product",
     "featured_product_1_DLECBK",
     "featured_collection_H9FcKT",

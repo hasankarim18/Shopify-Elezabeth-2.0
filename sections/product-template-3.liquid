@@ -5,27 +5,46 @@
 </style>
 {% assign selected_prduct = product.selected_or_first_available_variant %}
 
-<div class="template-product">
+  <div class="template-product">
   <div class="container">
     {% comment %} template name {% endcomment %}
-    {{ template.name }}
-      <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
+    <div class="flex gap-1">
+      Json Template Name: {{ template.name }} <pre> >> </pre>
+      Liquied Template Name: 'product-template-3'
+    </div>
+    <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
       {% comment %} #product images {% endcomment %}
       <div class="product_medias">
         <div class="featured_image mb-4">
-          <img
-            id="product_feature_image"
-            src="{{ selected_prduct.featured_image | image_url }}"
-            width=""
-            height=""
-            class="w-full h-80"
-            alt="">
+
+          {% if selected_prduct.featured_image %}
+            <img
+              id="product_feature_image"
+              src="{{ selected_prduct.featured_image | image_url }}"
+              width=""
+              height=""
+              class="w-full h-80"
+              alt="">
+          {% elsif product.featured_image %}
+            <img
+              id="product_feature_image"
+              src="{{ product.featured_image | image_url }}"
+              width=""
+              height=""
+              class="w-full h-80"
+              alt="">
+          {% else %}
+            placehoder
+            {{ 'product-1' | placeholder_svg_tag: 'w-full h-80' }}
+          {% endif %}
+
         </div>
         {% comment %} deskto product view {% endcomment %}
         <div class="hidden md:grid md:grid-cols-2 md:gap-2">
           {% for media in product.media %}
             {% render 'product-media'
-              , media: media %}
+              , media: media
+              , forloop: forloop %}
           {% endfor %}
         </div>
         {% comment %} mobile product slider {% endcomment %}
@@ -52,6 +71,14 @@
             , product: product
             , selected_prduct: selected_prduct %}
         </div>
+      </div>
+    </div>
+  </div>
+  {% comment %} product media light box {% endcomment %}
+  <div id="product-modal-container" class="fixed hidden  left-0 top-0 h-full w-full  z-50">
+    <div id="product-modal-container-close" class="w-full h-full flex bg-black bg-opacity-45 justify-center items-center">
+      <div id="product_media_viewer_div" class="max-w-md w-full bg-white">
+        modal
       </div>
     </div>
   </div>
@@ -239,7 +266,6 @@
     });
   }
   
-  
    
     getVariantIdAndUpdate(){
      
@@ -254,6 +280,72 @@
   }
   
   customElements.define("variant-selector",VariantSelector )
+  
+  // product modal
+  
+  
+  class ProductImageModalClass {
+        constructor(){
+          this.initModal()
+        }
+  
+        initModal(){
+            const productModalContainer = document.getElementById('product-modal-container')
+            const productModalContainerClose = document.getElementById('product-modal-container-close')
+            const allProductMedia = document.querySelectorAll('[data-product-media]')
+            const product_media_viewer_div = document.getElementById('product_media_viewer_div')
+            
+            allProductMedia.forEach((media) => {
+              media.addEventListener('click', (e) => {
+                const mediaType = media.getAttribute('data-product-media')
+                const mediaSrc = media.getAttribute('src')
+                e.stopPropagation()
+                e.preventDefault()
+                productModalContainer.classList.remove('hidden')
+                let mediaHtml = ''
+                      // Construct HTML based on media type
+              switch (mediaType) {
+                case 'image':
+                  mediaHtml = `<img src="${mediaSrc}" alt="Product Image" class="w-full h-auto">`;
+                  break;
+                case 'video':
+                const videoSrc = media.getAttribute('data-video-src');
+                  mediaHtml = `<video controls class="w-full h-auto"><source src="${videoSrc}" type="video/mp4">Your browser does not support the video tag.</video>`;
+                  break;
+                case 'external_video':
+                  const videoUrl = media.getAttribute('data-video-url'); // Assuming external video URL is stored in a data attribute
+                  mediaHtml = `<iframe src="${videoUrl}" class="w-full h-auto" frameborder="0" allowfullscreen></iframe>`;
+                  break;
+                case 'model':
+                  const modelSrc = media.getAttribute('data-model-src'); // Assuming model source is stored in a data attribute
+                  console.log(modelSrc)
+                  mediaHtml = `<model-viewer src="${modelSrc}" camera-controls="true" style="--poster-color: transparent;" data-shopify-feature="1.12" alt="Potion bottle" poster="//polinas-potent-potions.myshopify.com/cdn/shop/products/WaterBottle_small.jpg?v=1655189057"></model-viewer>`;
+                  break;
+                default:
+                  console.error('Unknown media type!');
+                  return;
+              }         
+                
+               product_media_viewer_div.innerHTML = mediaHtml
+               
+              })
+             
+            })
+  
+           // modal close
+            productModalContainerClose.addEventListener('click', (e) => {             
+              e.stopPropagation()
+               if(e.target === productModalContainerClose){
+                productModalContainer.classList.add('hidden')
+               }else{
+                return
+               }
+            })
+        } 
+  }
+  
+  const productImageModalClass = new ProductImageModalClass()
+  
   
    
   })
