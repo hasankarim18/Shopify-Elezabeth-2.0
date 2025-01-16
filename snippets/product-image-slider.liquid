@@ -13,7 +13,7 @@
               {% endif %}
               class="carousel-cell w-full"
               data-media-id="{{ media.id }}">
-              {{ media | image_url: width: 2048, height: 2048 | image_tag: width: nil, height: nil, class: 'w-full h-80', data-lightbox: datalightboxvalue, id: 'imagid' }}
+              {{ media | image_url: width: 2048, height: 2048 | image_tag: width: nil, height: nil, class: 'w-full h-[100vw] image-123', data-lightbox: datalightboxvalue, id: 'imagid' }}
             </li>
 
           {% when 'external_video' %}

@@ -10,11 +10,12 @@
 
   <div class="container">
     {% comment %} template name {% endcomment %}
-    {{ template.name }}
-      <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
+    {{ template.name }} feature image
+    <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
       {% comment %} #product images {% endcomment %}
       <div class="product_medias">
         <div class="featured_image mb-4">
+
           {{ product.featured_image | image_url: width: "600", height: "600" | image_tag: class: "w-full h-full" }}
         </div>
         {% comment %} deskto product view {% endcomment %}
@@ -26,9 +27,13 @@
 
         </div>
         {% comment %} mobile product slider {% endcomment %}
+
         <div class="block md:hidden">
+
           <div class="swiper mySwiper">
-            <ul class="swiper-wrapper h-94">
+
+            <ul class="ul-wrapper swiper-wrapper h-[100vw]">
+
               {% for media in product.media %}
                 {% render 'product-media-mobile'
                   , media: media %}

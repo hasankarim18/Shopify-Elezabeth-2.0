@@ -9,6 +9,10 @@
     </div>
     <div>
       {% form 'activate_customer_password' %}
+        {% if form.errors %}
+          <div class="py-3 text-center bg-warning rounded-md text-white font-bold">
+            {{ form.errors | default_errors }}</div>
+        {% endif %}
         <div>
           <label class="sr-only" for="password-{{section.id}}">Password</label>
           <div class="relative">
@@ -49,77 +53,22 @@
         </div>
         <div class="my-3">
           <button type="submit" class="btn btn-outline btn-neutral w-full block">Accept</button>
+          <button
+            type="submit"
+            name="decline"
+            class="btn btn-outline btn-neutral w-full block">Decline Invitation</button>
         </div>
       {% endform %}
     </div>
   </div>
+
+  {%- liquid
+  -%}
+
+  {% liquid
+  %}
+
 </div>
 
-<style>
-  .password_eyes {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 20px;
-  }
-</style>
 
-<script>
-  
-  
-  class TooglePassword{
-        constructor(){
-            this.initTogglePassword()
-        }
-  
-        initTogglePassword(){
-            const openEyes = document.querySelectorAll('span[data-password-eye-open]')
-            const closeEyes = document.querySelectorAll('span[data-password-eye-close]')
-            const passwordField = document.querySelectorAll('input[data-password-field]')
-            
-  
-            closeEyes.forEach((eye) => {
-               eye.addEventListener('click', (e) => {
-                e.stopPropagation()
-                eye.classList.add('hidden')
-                const parent = eye.parentElement 
-                const otherEye = parent.querySelector('span[data-password-eye-open]')
-                otherEye.classList.remove('hidden')               
-              
-                const input = parent.querySelector('input[data-password-field]')
-                
-                if(input.type === 'password'){
-                    input.type = 'text'
-                }else {
-                     input.type = 'password'
-                }
-  
-               })
-            })
-            openEyes.forEach((eye) => {
-               eye.addEventListener('click', (e) => {
-                e.stopPropagation()
-                eye.classList.add('hidden')
-              //  eye.previousElementSibling.classList.remove('hidden')
-             //   const parent = eye.parentElement 
-                const parent = eye.parentElement 
-                const otherEye = parent.querySelector('span[data-password-eye-close]')
-                otherEye.classList.remove('hidden')
-                const input = parent.querySelector('input[data-password-field]')
-                
-                if(input.type === 'password'){
-                    input.type = 'text'
-                }else {
-                     input.type = 'password'
-                }
-                
-               })
-            })
-  
-            console.log(openEyes)
-        }
-  
-    }
-  
-    const togglePassword = new TooglePassword()
-</script>
+<script></script>
