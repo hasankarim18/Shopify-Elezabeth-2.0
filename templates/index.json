@@ -13,6 +13,12 @@
       "type": "hero-banner",
       "settings": {}
     },
+    "featured_product_green": {
+      "type": "featured-product-1",
+      "settings": {
+        "selected_product": "green-t-shirt"
+      }
+    },
     "featured_product2": {
       "type": "featured-product-1",
       "settings": {
@@ -46,6 +52,7 @@
     }
   },
   "order": [
+    "featured_product_green",
     "hero-banner",
     "featured_product2",
     "featured-product",

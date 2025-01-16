@@ -21,7 +21,7 @@
     {% assign media_sources = media.sources %}
     {% assign model_src = media_sources[0].url %}
 
-    <div class="product-single_media border-2 shadow-sm p-2 rounded overflow-hidden ">
+    <div class="product-single_media border-2 shadow-sm p-2 rounded overflow-hidden flex justify-center items-center ">
       {{ media | model_viewer_tag: data-product-media: "model", data-model-src: model_src, class: "" }}
     </div>
   {% else %}
@@ -30,7 +30,7 @@
 
 
 {% comment %} 
-                              
-                               {"alt":null,"id":34875086995693,"position":9,"preview_image":{"aspect_ratio":1.778,"height":360,"width":640,"src":"\/\/elezabeth-dev-store.myshopify.com\/cdn\/shop\/files\/preview_images\/5c3371ba760f4af191811de61dfe0d15.thumbnail.0000000000.jpg?v=1735969256"},"aspect_ratio":1.775,"duration":14100,"media_type":"video","sources":[{"format":"mp4","height":480,"mime_type":"video\/mp4","url":"\/\/elezabeth-dev-store.myshopify.com\/cdn\/shop\/videos\/c\/vp\/5c3371ba760f4af191811de61dfe0d15\/5c3371ba760f4af191811de61dfe0d15.SD-480p-0.9Mbps-40497890.mp4?v=0","width":852}]}
-                              
+                                
+                                 {"alt":null,"id":34875086995693,"position":9,"preview_image":{"aspect_ratio":1.778,"height":360,"width":640,"src":"\/\/elezabeth-dev-store.myshopify.com\/cdn\/shop\/files\/preview_images\/5c3371ba760f4af191811de61dfe0d15.thumbnail.0000000000.jpg?v=1735969256"},"aspect_ratio":1.775,"duration":14100,"media_type":"video","sources":[{"format":"mp4","height":480,"mime_type":"video\/mp4","url":"\/\/elezabeth-dev-store.myshopify.com\/cdn\/shop\/videos\/c\/vp\/5c3371ba760f4af191811de61dfe0d15\/5c3371ba760f4af191811de61dfe0d15.SD-480p-0.9Mbps-40497890.mp4?v=0","width":852}]}
+                                
   {% endcomment %}

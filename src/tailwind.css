@@ -53,6 +53,10 @@
   .address-form select option {
     @apply p-2 w-full;
   }
+  /* animation classes */
+  .scale_down {
+    @apply scale-50;
+  }
 }
 
 @layer base {

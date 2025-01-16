@@ -75,10 +75,15 @@
     </div>
   </div>
   {% comment %} product media light box {% endcomment %}
-  <div id="product-modal-container" class="fixed hidden  left-0 top-0 h-full w-full  z-50">
-    <div id="product-modal-container-close" class="w-full h-full flex bg-black bg-opacity-45 justify-center items-center">
-      <div id="product_media_viewer_div" class="max-w-md w-full bg-white">
-        modal
+  <div id="product-modal-container" class="fixed hidden   left-0 top-0 h-full w-full  z-50">
+
+    <div id="product-modal-container-close" class="w-full h-full flex relative bg-black bg-opacity-45 justify-center items-center">
+      <div id="product-modal-container-close-button" class="absolute top-0 right-2 cursor-pointer">
+        {% render 'icon-close'
+          , class: 'w-8 h-8' %}
+      </div>
+      <div id="product_media_viewer_div" class="max-w-md h-auto w-full transition-all duration-300 scale-50 ">
+        <span class="hidden">modal</span>
       </div>
     </div>
   </div>
@@ -291,6 +296,7 @@
   
         initModal(){
             const productModalContainer = document.getElementById('product-modal-container')
+            const productModalContainerCloseButton = document.getElementById('product-modal-container-close-button')
             const productModalContainerClose = document.getElementById('product-modal-container-close')
             const allProductMedia = document.querySelectorAll('[data-product-media]')
             const product_media_viewer_div = document.getElementById('product_media_viewer_div')
@@ -301,7 +307,8 @@
                 const mediaSrc = media.getAttribute('src')
                 e.stopPropagation()
                 e.preventDefault()
-                productModalContainer.classList.remove('hidden')
+              
+  
                 let mediaHtml = ''
                       // Construct HTML based on media type
               switch (mediaType) {
@@ -319,14 +326,21 @@
                 case 'model':
                   const modelSrc = media.getAttribute('data-model-src'); // Assuming model source is stored in a data attribute
                   console.log(modelSrc)
-                  mediaHtml = `<model-viewer src="${modelSrc}" camera-controls="true" style="--poster-color: transparent;" data-shopify-feature="1.12" alt="Potion bottle" poster="//polinas-potent-potions.myshopify.com/cdn/shop/products/WaterBottle_small.jpg?v=1655189057"></model-viewer>`;
+                  mediaHtml = `<model-viewer src="${modelSrc}" class="w-full h-full min-h-[90vw] min-w-[90vw] md:min-h-[500px] md:min-w-[500px]" camera-controls="true" style="--poster-color: transparent;" data-shopify-feature="1.12" alt="Potion bottle" poster="//polinas-potent-potions.myshopify.com/cdn/shop/products/WaterBottle_small.jpg?v=1655189057"></model-viewer>`;
                   break;
                 default:
                   console.error('Unknown media type!');
                   return;
               }         
-                
+              productModalContainer.classList.remove('hidden')
+              setTimeout(() => {
+                product_media_viewer_div.classList.remove('scale-50')
+                product_media_viewer_div.classList.add('scale-100')
+  
+              }, 10); 
                product_media_viewer_div.innerHTML = mediaHtml
+  
+  
                
               })
              
@@ -336,10 +350,23 @@
             productModalContainerClose.addEventListener('click', (e) => {             
               e.stopPropagation()
                if(e.target === productModalContainerClose){
-                productModalContainer.classList.add('hidden')
+                product_media_viewer_div.classList.add('scale-50')
+                product_media_viewer_div.classList.remove('scale-100')              
+                setTimeout(() => {
+                  productModalContainer.classList.add('hidden')  
+              }, 100); 
                }else{
                 return
                }
+            })
+            productModalContainerCloseButton.addEventListener('click', (e) => {
+              e.stopPropagation()
+             
+              product_media_viewer_div.classList.add('scale-50')
+              product_media_viewer_div.classList.remove('scale-100')  
+              setTimeout(() => {
+                productModalContainer.classList.add('hidden')
+              }, 100); 
             })
         } 
   }
