@@ -1,0 +1,318 @@
+<style>
+  .product_infomation {
+    height: fit-content;
+  }
+</style>
+{% assign selected_prduct = product.selected_or_first_available_variant %}
+
+  <div x-data="{productModalOpen:false}" class="template-product">
+  <div class="container">
+    {% comment %} template name {% endcomment %}
+    <div class="flex gap-1">
+      Json Template Name: {{ template.name }} <pre> >> </pre>
+      Liquied Template Name: 'template-product-4'
+    </div>
+    <div class="product_wrapper grid grid-cols-1 md:grid-cols-2 gap-4 ">
+      {% comment %} #product images {% endcomment %}
+      <div class="product_medias">
+        <div class="featured_image mb-4">
+
+          {% if selected_prduct.featured_image %}
+            <img
+              id="product_feature_image"
+              src="{{ selected_prduct.featured_image | image_url }}"
+              width=""
+              height=""
+              class="w-full h-80"
+              alt="">
+          {% elsif product.featured_image %}
+            <img
+              id="product_feature_image"
+              src="{{ product.featured_image | image_url }}"
+              width=""
+              height=""
+              class="w-full h-80"
+              alt="">
+          {% else %}
+            placehoder
+            {{ 'product-1' | placeholder_svg_tag: 'w-full h-80' }}
+          {% endif %}
+
+        </div>
+        {% comment %} deskto product view {% endcomment %}
+        <div class="hidden md:grid md:grid-cols-2 md:gap-2">
+          {% for media in product.media %}
+            {% render 'product-media'
+              , media: media
+              , forloop: forloop %}
+          {% endfor %}
+        </div>
+        {% comment %} mobile product slider {% endcomment %}
+        <div class="block md:hidden">
+          <div class="swiper mySwiper">
+            <ul class="swiper-wrapper product-tem-3 h-[100vw]">
+              {% for media in product.media %}
+                {% render 'product-media-mobile'
+                  , media: media %}
+              {% endfor %}
+            </ul>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-scrollbar"></div>
+          </div>
+        </div>
+      </div>
+      {% comment %} product info {% endcomment %}
+      <div class="product_infomation sticky top-4">
+        <div class="">
+          {% render 'product-info-form3'
+            , section: section
+            , product: product
+            , selected_prduct: selected_prduct %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% comment %} product media light box {% endcomment %}
+  <div id="product-modal-container" class="fixed hidden   left-0 top-0 h-full w-full  z-50">
+
+    <div id="product-modal-container-close" class="w-full h-full flex relative bg-black bg-opacity-45 justify-center items-center">
+      <div id="product-modal-container-close-button" class="absolute top-0 right-2 cursor-pointer">
+        {% render 'icon-close'
+          , class: 'w-8 h-8' %}
+      </div>
+      <div id="product_media_viewer_div" class="max-w-md h-auto w-full transition-all duration-300 scale-50 ">
+        <span class="hidden">modal</span>
+      </div>
+    </div>
+  </div>
+  {% comment %} product model modal {% endcomment %}
+  <div id="productModelModal">
+    <div x-show="productModalOpen" class="w-full h-full z-50 items-center fixed inset-0">
+      <div class="relative w-full h-full bg-white">
+        <div class="relative">
+          <div class="flex justify-between items-start p-5 border-b">
+            <h2 class="text-xl font-bold text-gray-700">3D Model Preview</h2>
+            <button @click="productModalOpen=false" class="text-gray-400 bg-transparent hover:text-gray-700 rounded text-sm p-2 ml-auto inline-flex items-center">
+              {% render 'icon-close' %}
+            </button>
+          </div>
+          <div id="body" class="block relative"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script defer src="{{ "swiper-bundle.min.js" |  asset_url }}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    var swiper = new Swiper(".mySwiper", {
+      scrollbar: {
+        el: ".swiper-scrollbar",
+        hide: false,
+      },
+      navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+  },
+    });
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Product template-1",
+    "tag": "section",
+
+    "settings": [],
+    "blocks": [
+      {
+        "type": "vendor",
+        "name": "Vendor",
+        "limit": 2
+      },
+      {
+        "type": "title",
+        "name": "Title",
+        "limit": 1
+      },
+      {
+        "type": "price",
+        "name": "Price",
+        "limit": 1
+      },
+      {
+        "type": "variant_selector",
+        "name": "Variant Selector",
+        "limit": 1
+      },
+      {
+        "type": "quntity",
+        "name": "Quantity",
+        "limit": 1
+      },
+      {
+        "type": "description",
+        "name": "Description",
+        "limit": 1
+      },
+      {
+        "type": "checkout_button",
+        "name": "Checkout Button",
+        "limit": 1
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product template-1",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
+
+<script>
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    // showing initial id
+    const initialVariantId = {{ product.selected_or_first_available_variant.id }}  
+    const productId = document.getElementById('product_id')
+    window.productId = productId
+  
+    productId.innerHTML = initialVariantId
+  class VariantSelector extends HTMLElement {
+    constructor(){
+      super();
+      this.addEventListener('change', this.onVariantChange);
+    }
+    onVariantChange(){
+      this.getSelectedOptions()
+      this.getSelectedVariant()
+      this.getVariantIdAndUpdate()
+      if(this.currentVariant){
+        this.updateUrl()
+        this.updateFormId()
+        this.updateUi()      
+      }
+    }
+  
+    getSelectedOptions(){
+       this.options = Array.from(this.querySelectorAll('select'), (select)=>select.value);
+       console.log(this.options)
+    }
+  
+    getVariantJSON(){
+      this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent)
+      return this.variantData;
+    }
+  
+    getSelectedVariant(){    
+        this.currentVariant = this.getVariantJSON().find((variant) => 
+          variant.options.every((option, index) => this.options[index] === option)
+        );
+       // console.log(this.currentVariant)
+      }
+    
+    updateUrl(){
+      if(!this.currentVariant) return;
+      window.history.replaceState({}, '', `${this.dataset.url}?variant=${this.currentVariant.id}`)
+    }
+  
+    updateFormId(){
+      const form_input = document.querySelector('#product_form').querySelector('input[name="id"]')
+      form_input.value = this.currentVariant.id
+    }
+  
+    updateUi() {
+  fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
+    .then((response) => {    
+      if (response.status == 200) {
+        return response.text();
+      }else{       
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+     
+    })
+    .then((responseText) => {
+      const id = `price-${this.dataset.section}`;
+      const availableId = `available-${this.dataset.section}`;
+      const html = new DOMParser().parseFromString(responseText, 'text/html');
+  
+      const oldPrice = document.getElementById(id);
+      const newPrice = html.getElementById(id);
+      const oldAvailAble = document.getElementById(availableId);
+      const newAvailable = html.getElementById(availableId);
+  
+      if (oldPrice && newPrice) oldPrice.innerHTML = newPrice.innerHTML;
+  
+      const addToCartButton = document.getElementById('add_to_cart_button');
+      if (oldAvailAble && newAvailable) {
+        oldAvailAble.value = newAvailable.value;
+  
+        if (newAvailable.value === 'false') {
+          addToCartButton.innerText = "Sold Out";
+          addToCartButton.classList.add('text-red-600');
+          addToCartButton.style.cursor = 'not-allowed';
+          addToCartButton.disabled = true;
+          addToCartButton.style.opacity = '0.5';
+        } else if (newAvailable.value === 'true') {
+          addToCartButton.innerText = "Add to Cart";
+          addToCartButton.classList.remove('text-red-600');
+          addToCartButton.style.cursor = 'pointer';
+          addToCartButton.disabled = false;
+          addToCartButton.style.opacity = '1';
+        }
+      }
+  
+      // Update feature image
+      const oldProductFeatureImage = document.getElementById('product_feature_image');
+      const newProductFeatureImage = html.getElementById('product_feature_image');
+      if (oldProductFeatureImage && newProductFeatureImage) {
+        oldProductFeatureImage.src = newProductFeatureImage.src;
+      }
+    })
+    .catch((error) => {
+    
+      console.error("Failed to update price:", error);
+  
+      // Display an error message to the user (optional)
+      const errorMessage = document.getElementById('error_message');
+      if (errorMessage) {
+        errorMessage.innerText = "Failed to update product details. Please try again later.";
+        errorMessage.style.display = 'block';
+      }
+    });
+  }
+  
+   
+    getVariantIdAndUpdate(){
+     
+       // console.log(initialVariantId)
+        const currentUlr = window.location.href
+        const urlObj  = new URL(currentUlr)
+        const variant = urlObj.searchParams.get('variant')
+        productId.innerText = variant
+     //   console.log({variant})
+    }
+  
+  }
+  
+  customElements.define("variant-selector",VariantSelector )
+  
+  // product model viewer 
+  
+  
+  
+  
+  
+  
+  
+   
+  })
+</script>
+
+
+<script defer src="{{ 'product-modal.js' |  asset_url }}"></script>

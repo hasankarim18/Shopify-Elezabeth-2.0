@@ -17,20 +17,47 @@
       {{ media | external_video_tag: class: "cursro-pointer product-single_media  shadow-sm p-2 border-2 rounded overflow-hidden", data-product-media: "external_video" }}
     </div>
   {% when 'model' %}
+    <product-modal>
+      <div class="relative">
+        <span id="view_model" class="border z-30 cursor-pointer bg-gray-100 absolute top-1/2 left-1/2 tranform -translate-x-1/2 -translate-y-1/2">
+          {% render 'icon-model-viewer'
+            , class: "w-8 h-8 hover:scale-105 transition-all duration-100" %}
+        </span>
+        <div>
+          <button x-on:click="productModalOpen = true" class="w-full product-single_media border-2 shadow-sm p-2 rounded overflow-hidden h-full cursor-pointer bg-gray-100  relative">
+            <img
+              src="{{ media |  image_url  }}"
+              width=""
+              height=""
+              class="w-full h-80 object-cover "
+              alt="{{ media.preview_image.alt }}" />
+          </button>
+        </div>
+        <template>
+          {{ media | model_viewer_tag: reveal: 'interaction' }}
+        </template>
+      </div>
+    </product-modal>
 
-    {% assign media_sources = media.sources %}
-    {% assign model_src = media_sources[0].url %}
-
-    <div class="product-single_media border-2 shadow-sm p-2 rounded overflow-hidden flex justify-center items-center ">
-      {{ media | model_viewer_tag: data-product-media: "model", data-model-src: model_src, class: "" }}
-    </div>
+  {% comment %} <div class="product-single_media border-2 shadow-sm p-2 rounded overflow-hidden flex justify-center items-center "></div> {% endcomment %}
   {% else %}
     {{ media | media_tag }}
 {% endcase %}
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  
+  })
+</script>
 
 {% comment %} 
-                                
-                                 {"alt":null,"id":34875086995693,"position":9,"preview_image":{"aspect_ratio":1.778,"height":360,"width":640,"src":"\/\/elezabeth-dev-store.myshopify.com\/cdn\/shop\/files\/preview_images\/5c3371ba760f4af191811de61dfe0d15.thumbnail.0000000000.jpg?v=1735969256"},"aspect_ratio":1.775,"duration":14100,"media_type":"video","sources":[{"format":"mp4","height":480,"mime_type":"video\/mp4","url":"\/\/elezabeth-dev-store.myshopify.com\/cdn\/shop\/videos\/c\/vp\/5c3371ba760f4af191811de61dfe0d15\/5c3371ba760f4af191811de61dfe0d15.SD-480p-0.9Mbps-40497890.mp4?v=0","width":852}]}
-                                
-  {% endcomment %}
+                                                                                                
+                                                                  1. setup the <product-modal></product-modal> compoent
+                                                                  2. create the modal window
+                                                                  3. Javascript
+                                                                  4. use css
+                                                                  
+                                                                  {% assign media_sources = media.sources %}
+                                                                  {% assign model_src = media_sources[0].url %}
+                                                                  {{ media | model_viewer_tag: data-product-media: "model", data-model-src: model_src, class: "" }}
+{% endcomment %}
