@@ -17,14 +17,17 @@
       {{ media | external_video_tag: class: "cursro-pointer product-single_media  shadow-sm p-2 border-2 rounded overflow-hidden", data-product-media: "external_video" }}
     </div>
   {% when 'model' %}
-    <product-modal>
+    <product-modal data-media-id="{{ media.id }}">
       <div class="relative">
         <span id="view_model" class="border z-30 cursor-pointer bg-gray-100 absolute top-1/2 left-1/2 tranform -translate-x-1/2 -translate-y-1/2">
           {% render 'icon-model-viewer'
             , class: "w-8 h-8 hover:scale-105 transition-all duration-100" %}
         </span>
         <div>
-          <button x-on:click="productModalOpen = true" class="w-full product-single_media border-2 shadow-sm p-2 rounded overflow-hidden h-full cursor-pointer bg-gray-100  relative">
+          <button
+            id="productMoelModalOpenButton_{{ media.id }}"
+            x-on:click="productModalOpen = true"
+            class="w-full product-single_media border-2 shadow-sm p-2 rounded overflow-hidden h-full cursor-pointer bg-gray-100  relative">
             <img
               src="{{ media |  image_url  }}"
               width=""
@@ -51,13 +54,13 @@
 </script>
 
 {% comment %} 
-                                                                                                
-                                                                  1. setup the <product-modal></product-modal> compoent
-                                                                  2. create the modal window
-                                                                  3. Javascript
-                                                                  4. use css
-                                                                  
-                                                                  {% assign media_sources = media.sources %}
-                                                                  {% assign model_src = media_sources[0].url %}
-                                                                  {{ media | model_viewer_tag: data-product-media: "model", data-model-src: model_src, class: "" }}
+                                                                                                            
+                                                                              1. setup the <product-modal></product-modal> compoent
+                                                                              2. create the modal window
+                                                                              3. Javascript
+                                                                              4. use css
+                                                                              
+                                                                              {% assign media_sources = media.sources %}
+                                                                              {% assign model_src = media_sources[0].url %}
+                                                                              {{ media | model_viewer_tag: data-product-media: "model", data-model-src: model_src, class: "" }}
 {% endcomment %}
